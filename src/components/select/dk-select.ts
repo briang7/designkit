@@ -1,8 +1,9 @@
-import { html, nothing } from 'lit';
+import { html, nothing, type PropertyValues } from 'lit';
 import { customElement, property, state, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { DkElement } from '../../core/dk-element.js';
 import { selectStyles } from './dk-select.styles.js';
+import { dkAnimate, dkStagger } from '../../core/motion.js';
 
 export interface SelectOption {
   value: string;
@@ -111,6 +112,20 @@ export class DkSelect extends DkElement {
   override disconnectedCallback() {
     super.disconnectedCallback();
     document.removeEventListener('click', this.handleClickOutside);
+  }
+
+  override updated(changed: PropertyValues) {
+    super.updated(changed);
+    if (changed.has('open') && this.open) {
+      const dropdown = this.shadowRoot?.querySelector('.dropdown');
+      if (dropdown) {
+        dkAnimate(dropdown, { opacity: [0, 1], transform: ['translateY(-8px)', 'translateY(0)'] }, { duration: 0.2 });
+        const options = dropdown.querySelectorAll('.option');
+        if (options.length) {
+          dkStagger([...options], { opacity: [0, 1], transform: ['translateY(-4px)', 'translateY(0)'] }, { duration: 0.15, staggerDelay: 0.02 });
+        }
+      }
+    }
   }
 
   override render() {

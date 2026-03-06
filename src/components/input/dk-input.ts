@@ -44,15 +44,16 @@ export class DkInput extends DkElement {
 
   override render() {
     const hasError = !!this.errorText;
+    const hasValue = !!this.value;
     return html`
-      ${this.label ? html`<label part="label" class="label">${this.label}${this.required ? html`<span class="required"> *</span>` : nothing}</label>` : nothing}
-      <div part="wrapper" class=${classMap({ wrapper: true, [this.size]: true, error: hasError, disabled: this.disabled })}>
+      <div part="wrapper" class=${classMap({ wrapper: true, [this.size]: true, error: hasError, disabled: this.disabled, 'has-value': hasValue, 'has-label': !!this.label })}>
+        ${this.label ? html`<label part="label" class="label">${this.label}${this.required ? html`<span class="required"> *</span>` : nothing}</label>` : nothing}
         <slot name="prefix"></slot>
         <input
           part="input"
           type=${this.type}
           .value=${this.value}
-          placeholder=${this.placeholder || nothing}
+          placeholder=${this.label ? nothing : (this.placeholder || nothing)}
           ?disabled=${this.disabled}
           ?required=${this.required}
           aria-label=${this.label || nothing}

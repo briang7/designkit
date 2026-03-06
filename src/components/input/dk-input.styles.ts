@@ -7,12 +7,18 @@ export const inputStyles = css`
   }
 
   .label {
-    display: block;
-    margin-bottom: var(--dk-space-1);
+    position: absolute;
+    left: var(--dk-space-3);
+    top: 50%;
+    transform: translateY(-50%);
     font-family: var(--dk-font-sans);
     font-size: var(--dk-text-sm);
     font-weight: var(--dk-font-medium);
-    color: var(--dk-color-text);
+    color: var(--dk-color-text-muted);
+    pointer-events: none;
+    transition: transform var(--dk-transition-normal), font-size var(--dk-transition-normal), color var(--dk-transition-normal);
+    transform-origin: left center;
+    z-index: 1;
   }
 
   .required {
@@ -20,6 +26,7 @@ export const inputStyles = css`
   }
 
   .wrapper {
+    position: relative;
     display: flex;
     align-items: center;
     gap: var(--dk-space-2);
@@ -28,6 +35,16 @@ export const inputStyles = css`
     background: var(--dk-color-input-bg);
     transition: all var(--dk-transition-fast);
     overflow: hidden;
+  }
+
+  .wrapper.has-label {
+    padding-top: var(--dk-space-2);
+  }
+
+  .wrapper:focus-within .label,
+  .wrapper.has-value .label {
+    transform: translateY(-140%) scale(0.85);
+    color: var(--dk-color-input-border-focus);
   }
 
   .wrapper:hover:not(.disabled) {

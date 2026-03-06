@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import { reducedMotion, slideInDown } from '../../core/animations.js';
+import { reducedMotion } from '../../core/animations.js';
 
 export const selectStyles = css`
   :host {
@@ -104,7 +104,7 @@ export const selectStyles = css`
     box-shadow: var(--dk-shadow-lg);
     max-height: 256px;
     overflow-y: auto;
-    animation: dk-slide-in-down 150ms ease;
+    /* animation handled by Motion One */
   }
 
   .search-wrapper {
@@ -168,6 +168,5 @@ export const selectStyles = css`
     color: var(--dk-color-text-muted);
   }
 
-  ${slideInDown}
   ${reducedMotion}
 `;

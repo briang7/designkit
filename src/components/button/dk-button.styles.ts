@@ -23,6 +23,7 @@ export const buttonStyles = css`
     cursor: pointer;
     transition: all var(--dk-transition-fast);
     position: relative;
+    overflow: hidden;
     white-space: nowrap;
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
@@ -63,7 +64,7 @@ export const buttonStyles = css`
   }
 
   button.primary:active {
-    transform: scale(0.98);
+    /* spring animation handles press scale */
   }
 
   /* Secondary variant */
@@ -79,7 +80,7 @@ export const buttonStyles = css`
   }
 
   button.secondary:active {
-    transform: scale(0.98);
+    /* spring animation handles press scale */
   }
 
   /* Ghost variant */
@@ -93,7 +94,7 @@ export const buttonStyles = css`
   }
 
   button.ghost:active {
-    transform: scale(0.98);
+    /* spring animation handles press scale */
   }
 
   /* Danger variant */
@@ -107,7 +108,7 @@ export const buttonStyles = css`
   }
 
   button.danger:active {
-    transform: scale(0.98);
+    /* spring animation handles press scale */
   }
 
   /* Disabled */
@@ -137,6 +138,15 @@ export const buttonStyles = css`
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.3;
+    pointer-events: none;
+    transform: scale(0);
   }
 
   ${spin}

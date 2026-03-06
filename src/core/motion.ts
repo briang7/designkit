@@ -2,7 +2,15 @@ import { animate } from 'motion';
 import type { AnimationOptions } from 'motion';
 
 const prefersReducedMotion = () =>
+  typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function applyFinalValues(el: Element, keyframes: Record<string, any>) {
+  Object.entries(keyframes).forEach(([prop, value]) => {
+    const finalValue = Array.isArray(value) ? value[value.length - 1] : value;
+    (el as HTMLElement).style.setProperty(prop, String(finalValue));
+  });
+}
 
 export function dkAnimate(
   el: Element,
@@ -10,16 +18,17 @@ export function dkAnimate(
   options: AnimationOptions = {}
 ) {
   if (prefersReducedMotion()) {
-    Object.entries(keyframes).forEach(([prop, value]) => {
-      const finalValue = Array.isArray(value) ? value[value.length - 1] : value;
-      (el as HTMLElement).style.setProperty(prop, String(finalValue));
-    });
+    applyFinalValues(el, keyframes);
     return;
   }
-  return animate(el, keyframes, {
-    duration: 0.25,
-    ...options,
-  });
+  try {
+    return animate(el, keyframes, {
+      duration: 0.25,
+      ...options,
+    });
+  } catch {
+    applyFinalValues(el, keyframes);
+  }
 }
 
 export function dkSpring(
@@ -28,18 +37,19 @@ export function dkSpring(
   options: Partial<{ stiffness: number; damping: number; mass: number }> = {}
 ) {
   if (prefersReducedMotion()) {
-    Object.entries(keyframes).forEach(([prop, value]) => {
-      const finalValue = Array.isArray(value) ? value[value.length - 1] : value;
-      (el as HTMLElement).style.setProperty(prop, String(finalValue));
-    });
+    applyFinalValues(el, keyframes);
     return;
   }
-  return animate(el, keyframes, {
-    type: 'spring',
-    stiffness: options.stiffness ?? 300,
-    damping: options.damping ?? 24,
-    mass: options.mass ?? 1,
-  });
+  try {
+    return animate(el, keyframes, {
+      type: 'spring',
+      stiffness: options.stiffness ?? 300,
+      damping: options.damping ?? 24,
+      mass: options.mass ?? 1,
+    });
+  } catch {
+    applyFinalValues(el, keyframes);
+  }
 }
 
 export function dkStagger(
@@ -49,11 +59,15 @@ export function dkStagger(
 ) {
   const { staggerDelay = 0.05, ...animOptions } = options;
   if (prefersReducedMotion()) return;
-  return els.map((el, i) =>
-    animate(el, keyframes, {
-      duration: 0.4,
-      delay: i * staggerDelay,
-      ...animOptions,
-    })
-  );
+  try {
+    return els.map((el, i) =>
+      animate(el, keyframes, {
+        duration: 0.4,
+        delay: i * staggerDelay,
+        ...animOptions,
+      })
+    );
+  } catch {
+    // graceful degradation in environments without full DOM animation support
+  }
 }

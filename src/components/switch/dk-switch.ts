@@ -3,6 +3,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { DkElement } from '../../core/dk-element.js';
 import { switchStyles } from './dk-switch.styles.js';
+import { dkSpring } from '../../core/motion.js';
 
 @customElement('dk-switch')
 export class DkSwitch extends DkElement {
@@ -12,10 +13,26 @@ export class DkSwitch extends DkElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
   @property({ reflect: true }) size: 'sm' | 'md' | 'lg' = 'md';
 
+  private getThumbDistance(): number {
+    switch (this.size) {
+      case 'sm': return 16;
+      case 'lg': return 24;
+      default: return 20;
+    }
+  }
+
   private handleClick() {
     if (this.disabled) return;
     this.checked = !this.checked;
     this.emitEvent('dk-change', { checked: this.checked });
+
+    const thumb = this.shadowRoot?.querySelector('.thumb') as HTMLElement | null;
+    if (thumb) {
+      const distance = this.getThumbDistance();
+      const from = this.checked ? '0px' : `${distance}px`;
+      const to = this.checked ? `${distance}px` : '0px';
+      dkSpring(thumb, { transform: [`translateX(${from})`, `translateX(${to})`] });
+    }
   }
 
   private handleKeyDown(e: KeyboardEvent) {

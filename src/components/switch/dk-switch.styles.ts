@@ -46,7 +46,6 @@ export const switchStyles = css`
     border-radius: 50%;
     background: white;
     box-shadow: var(--dk-shadow-sm);
-    transition: transform var(--dk-transition-fast);
   }
 
   /* Sizes */
@@ -59,9 +58,7 @@ export const switchStyles = css`
     height: 16px;
     left: 2px;
   }
-  .switch.sm.checked .thumb {
-    transform: translateX(16px);
-  }
+  /* thumb position handled by spring animation */
 
   .switch.md .track {
     width: 44px;
@@ -72,9 +69,7 @@ export const switchStyles = css`
     height: 20px;
     left: 2px;
   }
-  .switch.md.checked .thumb {
-    transform: translateX(20px);
-  }
+  /* thumb position handled by spring animation */
 
   .switch.lg .track {
     width: 52px;
@@ -85,9 +80,7 @@ export const switchStyles = css`
     height: 24px;
     left: 2px;
   }
-  .switch.lg.checked .thumb {
-    transform: translateX(24px);
-  }
+  /* thumb position handled by spring animation */
 
   .label:empty {
     display: none;

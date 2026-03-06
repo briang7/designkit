@@ -3,6 +3,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { DkElement } from '../../core/dk-element.js';
 import { checkboxStyles } from './dk-checkbox.styles.js';
+import { dkSpring } from '../../core/motion.js';
 
 @customElement('dk-checkbox')
 export class DkCheckbox extends DkElement {
@@ -17,6 +18,11 @@ export class DkCheckbox extends DkElement {
     this.checked = !this.checked;
     this.indeterminate = false;
     this.emitEvent('dk-change', { checked: this.checked });
+
+    const control = this.shadowRoot?.querySelector('.control');
+    if (control && this.checked) {
+      dkSpring(control, { scale: [0.85, 1] });
+    }
   }
 
   private handleKeyDown(e: KeyboardEvent) {
