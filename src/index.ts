@@ -31,3 +31,6 @@ export { DkDialog } from './components/dialog/index.js';
 
 export { DkDrawer } from './components/drawer/index.js';
 export type { DrawerPlacement } from './components/drawer/index.js';
+
+export { DkToast, DkToastContainer } from './components/toast/index.js';
+export type { ToastVariant, ToastPlacement, ToastOptions } from './components/toast/index.js';
