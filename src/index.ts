@@ -26,3 +26,8 @@ export { DkTooltip } from './components/tooltip/index.js';
 export type { TooltipPlacement } from './components/tooltip/index.js';
 
 export { DkTabs, DkTab, DkTabPanel } from './components/tabs/index.js';
+
+export { DkDialog } from './components/dialog/index.js';
+
+export { DkDrawer } from './components/drawer/index.js';
+export type { DrawerPlacement } from './components/drawer/index.js';
