@@ -12,7 +12,49 @@
       "import": "./dist/index.js",
       "require": "./dist/designkit.umd.cjs"
     },
-    "./themes/*": "./dist/themes/*"
+    "./themes/*": "./dist/themes/*",
+    "./button": {
+      "import": "./dist/components/button/index.js"
+    },
+    "./badge": {
+      "import": "./dist/components/badge/index.js"
+    },
+    "./avatar": {
+      "import": "./dist/components/avatar/index.js"
+    },
+    "./input": {
+      "import": "./dist/components/input/index.js"
+    },
+    "./checkbox": {
+      "import": "./dist/components/checkbox/index.js"
+    },
+    "./switch": {
+      "import": "./dist/components/switch/index.js"
+    },
+    "./select": {
+      "import": "./dist/components/select/index.js"
+    },
+    "./card": {
+      "import": "./dist/components/card/index.js"
+    },
+    "./tooltip": {
+      "import": "./dist/components/tooltip/index.js"
+    },
+    "./tabs": {
+      "import": "./dist/components/tabs/index.js"
+    },
+    "./dialog": {
+      "import": "./dist/components/dialog/index.js"
+    },
+    "./drawer": {
+      "import": "./dist/components/drawer/index.js"
+    },
+    "./toast": {
+      "import": "./dist/components/toast/index.js"
+    },
+    "./data-table": {
+      "import": "./dist/components/data-table/index.js"
+    }
   },
   "files": [
     "dist",
@@ -26,7 +68,10 @@
     "lint": "eslint src/",
     "typecheck": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "npm run build && changeset publish"
   },
   "keywords": [
     "web-components",
@@ -44,6 +89,7 @@
     "lit": "^3.3.2"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.30.0",
     "@open-wc/testing": "^4.0.0",
     "@storybook/addon-a11y": "^8.6.18",
     "@storybook/addon-essentials": "^8.6.14",

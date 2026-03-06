@@ -34,3 +34,6 @@ export type { DrawerPlacement } from './components/drawer/index.js';
 
 export { DkToast, DkToastContainer } from './components/toast/index.js';
 export type { ToastVariant, ToastPlacement, ToastOptions } from './components/toast/index.js';
+
+export { DkDataTable } from './components/data-table/index.js';
+export type { DkColumn } from './components/data-table/index.js';
