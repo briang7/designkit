@@ -1,0 +1,30 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Frameworks/Angular" />
+
+# Using with Angular
+
+```bash
+npm install @briang7/designkit
+```
+
+Add `CUSTOM_ELEMENTS_SCHEMA` to your component:
+
+```ts
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import '@briang7/designkit';
+
+@Component({
+  selector: 'app-root',
+  template: '<dk-button variant="primary">Click Me</dk-button>',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
+export class AppComponent {}
+```
+
+Import themes in `styles.css`:
+
+```css
+@import '@briang7/designkit/themes/tokens.css';
+@import '@briang7/designkit/themes/light.css';
+```

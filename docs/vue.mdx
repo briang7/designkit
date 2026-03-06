@@ -1,0 +1,35 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Frameworks/Vue" />
+
+# Using with Vue
+
+```bash
+npm install @briang7/designkit
+```
+
+In `vite.config.ts`:
+
+```ts
+export default defineConfig({
+  plugins: [vue({
+    template: {
+      compilerOptions: {
+        isCustomElement: (tag) => tag.startsWith('dk-'),
+      },
+    },
+  })],
+});
+```
+
+```vue
+<script setup>
+import '@briang7/designkit';
+import '@briang7/designkit/themes/tokens.css';
+import '@briang7/designkit/themes/light.css';
+</script>
+
+<template>
+  <dk-button variant="primary">Click Me</dk-button>
+</template>
+```

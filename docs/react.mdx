@@ -1,0 +1,31 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Frameworks/React" />
+
+# Using with React
+
+```bash
+npm install @briang7/designkit
+```
+
+```tsx
+import '@briang7/designkit';
+import '@briang7/designkit/themes/tokens.css';
+import '@briang7/designkit/themes/light.css';
+
+function App() {
+  return <dk-button variant="primary">Click Me</dk-button>;
+}
+```
+
+For TypeScript, add to a `.d.ts` file:
+
+```ts
+declare namespace JSX {
+  interface IntrinsicElements {
+    'dk-button': any;
+    'dk-input': any;
+    // ... other components
+  }
+}
+```

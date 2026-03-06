@@ -1,0 +1,23 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Frameworks/Vanilla HTML" />
+
+# Using with Vanilla HTML
+
+No build tools needed -- just add a script tag:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/@briang7/designkit/dist/themes/tokens.css">
+  <link rel="stylesheet" href="https://unpkg.com/@briang7/designkit/dist/themes/light.css">
+</head>
+<body>
+  <dk-button variant="primary">Click Me</dk-button>
+  <dk-input label="Name" placeholder="Enter your name"></dk-input>
+
+  <script src="https://unpkg.com/@briang7/designkit/dist/designkit.umd.cjs"></script>
+</body>
+</html>
+```

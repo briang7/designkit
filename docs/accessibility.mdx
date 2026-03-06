@@ -1,0 +1,30 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Accessibility" />
+
+# Accessibility
+
+All DesignKit components target WCAG 2.1 AA compliance.
+
+## Keyboard Navigation
+
+| Component | Keys |
+|-----------|------|
+| Button | Enter, Space |
+| Checkbox | Space |
+| Switch | Space |
+| Select | Arrow keys, Enter, Escape |
+| Tabs | Arrow keys, Home, End |
+| Dialog | Escape, focus trap |
+| Drawer | Escape, focus trap |
+| Tooltip | Escape to dismiss |
+
+## Focus Management
+
+- Visible focus ring on keyboard navigation (`:focus-visible`)
+- Focus trap in Dialog and Drawer
+- Focus restored after Dialog/Drawer closes
+
+## Reduced Motion
+
+All animations respect `prefers-reduced-motion: reduce`.

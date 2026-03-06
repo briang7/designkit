@@ -1,0 +1,44 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Getting Started" />
+
+# Getting Started
+
+DesignKit is a framework-agnostic UI component library built with Web Components. Use it with React, Vue, Angular, or plain HTML.
+
+## Install via npm
+
+```bash
+npm install @briang7/designkit
+```
+
+Import the theme and components:
+
+```js
+import '@briang7/designkit/themes/tokens.css';
+import '@briang7/designkit/themes/light.css';
+import '@briang7/designkit';
+```
+
+## Use via CDN
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/@briang7/designkit/dist/themes/tokens.css">
+<link rel="stylesheet" href="https://unpkg.com/@briang7/designkit/dist/themes/light.css">
+<script src="https://unpkg.com/@briang7/designkit/dist/designkit.umd.cjs"></script>
+```
+
+## Your First Component
+
+```html
+<dk-button variant="primary" size="md">Hello DesignKit</dk-button>
+```
+
+## Tree-Shaking
+
+Import individual components for smaller bundles:
+
+```js
+import '@briang7/designkit/button';
+import '@briang7/designkit/input';
+```

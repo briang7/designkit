@@ -1,0 +1,40 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Theming" />
+
+# Theming
+
+DesignKit uses CSS custom properties for theming.
+
+## Quick Start
+
+```html
+<link rel="stylesheet" href="@briang7/designkit/themes/tokens.css">
+<link rel="stylesheet" href="@briang7/designkit/themes/light.css">
+```
+
+## Dark Mode
+
+Add the `dk-dark` class to any container:
+
+```html
+<body class="dk-dark">...</body>
+```
+
+Or use automatic detection:
+
+```html
+<link rel="stylesheet" href="@briang7/designkit/themes/auto.css">
+```
+
+## Custom Theme
+
+Override any semantic token:
+
+```css
+:root {
+  --dk-color-primary: #9333ea;
+  --dk-color-primary-hover: #7e22ce;
+  --dk-radius-md: 16px;
+}
+```
