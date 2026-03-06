@@ -18,3 +18,11 @@ export { DkSwitch } from './components/switch/index.js';
 
 export { DkSelect } from './components/select/index.js';
 export type { SelectOption } from './components/select/index.js';
+
+export { DkCard } from './components/card/index.js';
+export type { CardVariant } from './components/card/index.js';
+
+export { DkTooltip } from './components/tooltip/index.js';
+export type { TooltipPlacement } from './components/tooltip/index.js';
+
+export { DkTabs, DkTab, DkTabPanel } from './components/tabs/index.js';
