@@ -11,3 +11,10 @@ export type { BadgeVariant, BadgeSize } from './components/badge/index.js';
 
 export { DkInput } from './components/input/index.js';
 export type { InputSize } from './components/input/index.js';
+
+export { DkCheckbox } from './components/checkbox/index.js';
+
+export { DkSwitch } from './components/switch/index.js';
+
+export { DkSelect } from './components/select/index.js';
+export type { SelectOption } from './components/select/index.js';
