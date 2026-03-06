@@ -1,0 +1,116 @@
+:root {
+  /* Colors - Blue */
+  --dk-blue-50: #eff6ff;
+  --dk-blue-100: #dbeafe;
+  --dk-blue-200: #bfdbfe;
+  --dk-blue-300: #93c5fd;
+  --dk-blue-400: #60a5fa;
+  --dk-blue-500: #3b82f6;
+  --dk-blue-600: #2563eb;
+  --dk-blue-700: #1d4ed8;
+  --dk-blue-800: #1e40af;
+  --dk-blue-900: #1e3a8a;
+
+  /* Colors - Gray */
+  --dk-gray-50: #f9fafb;
+  --dk-gray-100: #f3f4f6;
+  --dk-gray-200: #e5e7eb;
+  --dk-gray-300: #d1d5db;
+  --dk-gray-400: #9ca3af;
+  --dk-gray-500: #6b7280;
+  --dk-gray-600: #4b5563;
+  --dk-gray-700: #374151;
+  --dk-gray-800: #1f2937;
+  --dk-gray-900: #111827;
+  --dk-gray-950: #030712;
+
+  /* Colors - Red */
+  --dk-red-50: #fef2f2;
+  --dk-red-100: #fee2e2;
+  --dk-red-500: #ef4444;
+  --dk-red-600: #dc2626;
+  --dk-red-700: #b91c1c;
+
+  /* Colors - Green */
+  --dk-green-50: #f0fdf4;
+  --dk-green-100: #dcfce7;
+  --dk-green-500: #22c55e;
+  --dk-green-600: #16a34a;
+  --dk-green-700: #15803d;
+
+  /* Colors - Yellow */
+  --dk-yellow-50: #fefce8;
+  --dk-yellow-100: #fef9c3;
+  --dk-yellow-500: #eab308;
+  --dk-yellow-600: #ca8a04;
+
+  /* Colors - Purple */
+  --dk-purple-50: #faf5ff;
+  --dk-purple-500: #a855f7;
+  --dk-purple-600: #9333ea;
+
+  /* White */
+  --dk-white: #ffffff;
+  --dk-black: #000000;
+
+  /* Spacing */
+  --dk-space-0: 0;
+  --dk-space-1: 4px;
+  --dk-space-2: 8px;
+  --dk-space-3: 12px;
+  --dk-space-4: 16px;
+  --dk-space-5: 20px;
+  --dk-space-6: 24px;
+  --dk-space-8: 32px;
+  --dk-space-10: 40px;
+  --dk-space-12: 48px;
+  --dk-space-16: 64px;
+
+  /* Border Radius */
+  --dk-radius-none: 0;
+  --dk-radius-sm: 4px;
+  --dk-radius-md: 8px;
+  --dk-radius-lg: 12px;
+  --dk-radius-xl: 16px;
+  --dk-radius-full: 9999px;
+
+  /* Font Sizes */
+  --dk-text-xs: 0.75rem;
+  --dk-text-sm: 0.875rem;
+  --dk-text-md: 1rem;
+  --dk-text-lg: 1.125rem;
+  --dk-text-xl: 1.25rem;
+
+  /* Font Weights */
+  --dk-font-normal: 400;
+  --dk-font-medium: 500;
+  --dk-font-semibold: 600;
+  --dk-font-bold: 700;
+
+  /* Line Heights */
+  --dk-leading-tight: 1.25;
+  --dk-leading-normal: 1.5;
+
+  /* Shadows */
+  --dk-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --dk-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --dk-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --dk-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* Transitions */
+  --dk-transition-fast: 150ms ease;
+  --dk-transition-normal: 250ms ease;
+  --dk-transition-slow: 350ms ease;
+
+  /* Z-Index */
+  --dk-z-dropdown: 1000;
+  --dk-z-sticky: 1100;
+  --dk-z-overlay: 1300;
+  --dk-z-modal: 1400;
+  --dk-z-toast: 1500;
+  --dk-z-tooltip: 1600;
+
+  /* Font Family */
+  --dk-font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --dk-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+}
