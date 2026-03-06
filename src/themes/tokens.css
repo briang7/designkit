@@ -113,4 +113,31 @@
   /* Font Family */
   --dk-font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --dk-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Section spacing */
+  --dk-section-padding-y: 80px;
+  --dk-section-padding-x: 24px;
+  --dk-section-max-width: 1280px;
+  --dk-section-gap: 64px;
+
+  /* Typography scale (display) */
+  --dk-font-size-display: 3.5rem;
+  --dk-font-size-headline: 2.25rem;
+  --dk-font-size-subheadline: 1.25rem;
+  --dk-line-height-display: 1.1;
+  --dk-line-height-headline: 1.2;
+
+  /* Animation tokens */
+  --dk-spring-stiffness: 300;
+  --dk-spring-damping: 24;
+  --dk-stagger-delay: 50ms;
+  --dk-entrance-duration: 600ms;
+  --dk-entrance-distance: 20px;
+
+  /* Skeleton */
+  --dk-skeleton-base: var(--dk-gray-200);
+  --dk-skeleton-shine: var(--dk-gray-100);
+
+  /* Navbar */
+  --dk-navbar-height: 64px;
 }

@@ -27,4 +27,11 @@
   --dk-color-input-border-hover: var(--dk-gray-400);
   --dk-color-input-border-focus: var(--dk-blue-500);
   --dk-color-input-placeholder: var(--dk-gray-400);
+  --dk-section-bg-primary: var(--dk-color-surface);
+  --dk-section-bg-alt: var(--dk-gray-50);
+  --dk-section-bg-brand: var(--dk-color-primary);
+  --dk-section-bg-dark: var(--dk-gray-900);
+  --dk-section-text-on-brand: #ffffff;
+  --dk-section-text-on-dark: #ffffff;
+  --dk-navbar-bg: var(--dk-color-surface);
 }
