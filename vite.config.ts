@@ -11,6 +11,7 @@ export default defineConfig({
       formats: ['es', 'umd'],
     },
     outDir: 'dist',
+    emptyOutDir: false,
     sourcemap: true,
   },
   plugins: [

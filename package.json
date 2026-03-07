@@ -1,6 +1,6 @@
 {
   "name": "@briang7/designkit",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Framework-agnostic UI component library built with Lit Web Components",
   "type": "module",
   "main": "dist/designkit.umd.cjs",
@@ -54,7 +54,25 @@
     },
     "./data-table": {
       "import": "./dist/components/data-table/index.js"
-    }
+    },
+    "./skeleton": { "import": "./dist/signature/skeleton/index.js" },
+    "./command": { "import": "./dist/signature/command/index.js" },
+    "./form": { "import": "./dist/signature/form/index.js" },
+    "./sections": { "import": "./dist/sections.js" },
+    "./sections/navbar": { "import": "./dist/sections/navbar/index.js" },
+    "./sections/hero": { "import": "./dist/sections/hero/index.js" },
+    "./sections/footer": { "import": "./dist/sections/footer/index.js" },
+    "./sections/features": { "import": "./dist/sections/features/index.js" },
+    "./sections/testimonials": { "import": "./dist/sections/testimonials/index.js" },
+    "./sections/cta": { "import": "./dist/sections/cta/index.js" },
+    "./sections/stats": { "import": "./dist/sections/stats/index.js" },
+    "./sections/pricing": { "import": "./dist/sections/pricing/index.js" },
+    "./sections/faq": { "import": "./dist/sections/faq/index.js" },
+    "./sections/newsletter": { "import": "./dist/sections/newsletter/index.js" },
+    "./sections/gallery": { "import": "./dist/sections/gallery/index.js" },
+    "./sections/sidebar": { "import": "./dist/sections/sidebar/index.js" },
+    "./sections/team": { "import": "./dist/sections/team/index.js" },
+    "./sections/contact": { "import": "./dist/sections/contact/index.js" }
   },
   "files": [
     "dist",
