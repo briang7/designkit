@@ -45,13 +45,17 @@ export const Outlined: Story = {
 };
 
 export const WithMedia: Story = {
+  args: {
+    variant: "elevated"
+  },
+
   render: () => html`
     <dk-card style="max-width: 360px;">
       <img slot="media" src="https://picsum.photos/360/200" alt="Random" style="width: 100%; height: 200px; object-fit: cover;">
       <div slot="header">Photo Card</div>
       <p>A card with an image at the top.</p>
     </dk-card>
-  `,
+  `
 };
 
 export const WithHeaderFooter: Story = {
