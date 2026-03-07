@@ -16,21 +16,21 @@ const carouselStyles = css`
     transition: transform 0.5s ease;
   }
 
-  .slide {
+  ::slotted(dk-testimonial-card) {
     flex: 0 0 100%;
     min-width: 0;
-    padding: 0 var(--dk-space-2, 0.5rem);
+    padding: var(--dk-space-2, 0.5rem);
     box-sizing: border-box;
   }
 
   @media (min-width: 1024px) {
-    .slide {
+    ::slotted(dk-testimonial-card) {
       flex: 0 0 33.333%;
     }
   }
 
   @media (min-width: 768px) and (max-width: 1023px) {
-    .slide {
+    ::slotted(dk-testimonial-card) {
       flex: 0 0 50%;
     }
   }
@@ -100,6 +100,7 @@ export class DkSectionTestimonialsCarousel extends DkSectionElement {
   @state() private _currentIndex = 0;
   @state() private _slideCount = 0;
   private _autoplayTimer?: number;
+  private _wheelDebounce = false;
 
   override connectedCallback() {
     super.connectedCallback();
@@ -125,47 +126,110 @@ export class DkSectionTestimonialsCarousel extends DkSectionElement {
     }
   }
 
+  private _getVisibleCount(): number {
+    const w = window.innerWidth;
+    if (w >= 1024) return 3;
+    if (w >= 768) return 2;
+    return 1;
+  }
+
+  private _getMaxIndex(): number {
+    const visible = this._getVisibleCount();
+    return Math.max(0, this._slideCount - visible);
+  }
+
   private _onSlotChange(e: Event) {
     const slot = e.target as HTMLSlotElement;
-    this._slideCount = slot.assignedElements().length;
-    if (this._currentIndex >= this._slideCount) {
+    const elements = slot.assignedElements();
+    this._slideCount = elements.length;
+    if (this._currentIndex > this._getMaxIndex()) {
       this._currentIndex = 0;
     }
+    this._updateTrackHeight(elements);
+  }
+
+  private _updateTrackHeight(elements: Element[]) {
+    const measure = () => {
+      let maxHeight = 0;
+      for (const el of elements) {
+        // Measure the inner .card from the testimonial-card's shadow DOM
+        const card = (el as HTMLElement).shadowRoot?.querySelector('.card') as HTMLElement;
+        const h = card ? card.offsetHeight : (el as HTMLElement).offsetHeight;
+        if (h > maxHeight) maxHeight = h;
+      }
+      if (maxHeight > 0) {
+        const track = this.shadowRoot?.querySelector('.track') as HTMLElement;
+        if (track) {
+          // Add slotted padding (top + bottom)
+          const slottedPadding = parseFloat(getComputedStyle(elements[0] as HTMLElement).paddingTop) +
+            parseFloat(getComputedStyle(elements[0] as HTMLElement).paddingBottom);
+          track.style.minHeight = `${maxHeight + slottedPadding}px`;
+        }
+      }
+    };
+    requestAnimationFrame(() => requestAnimationFrame(measure));
   }
 
   private _next() {
     if (this._slideCount === 0) return;
-    this._currentIndex = (this._currentIndex + 1) % this._slideCount;
+    const max = this._getMaxIndex();
+    if (this._currentIndex < max) {
+      this._currentIndex++;
+    } else {
+      this._currentIndex = 0;
+    }
     this._animateSlide();
   }
 
   private _prev() {
     if (this._slideCount === 0) return;
-    this._currentIndex = (this._currentIndex - 1 + this._slideCount) % this._slideCount;
+    if (this._currentIndex > 0) {
+      this._currentIndex--;
+    } else {
+      this._currentIndex = this._getMaxIndex();
+    }
     this._animateSlide();
   }
 
   private _goTo(index: number) {
-    this._currentIndex = index;
+    this._currentIndex = Math.min(index, this._getMaxIndex());
     this._animateSlide();
   }
 
   private _animateSlide() {
     const track = this.shadowRoot?.querySelector('.track') as HTMLElement;
     if (track) {
+      const pct = this._currentIndex * (100 / this._getVisibleCount());
       dkSpring(track, {
-        transform: `translateX(-${this._currentIndex * 100}%)`,
+        transform: `translateX(-${pct}%)`,
       });
     }
   }
 
   private _getTrackTransform(): string {
-    return `translateX(-${this._currentIndex * 100}%)`;
+    const pct = this._currentIndex * (100 / this._getVisibleCount());
+    return `translateX(-${pct}%)`;
   }
+
+  private _onWheel(e: WheelEvent) {
+    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    if (Math.abs(delta) < 10) return;
+    e.preventDefault();
+    if (this._wheelDebounce) return;
+    this._wheelDebounce = true;
+    if (delta > 0) {
+      this._next();
+    } else {
+      this._prev();
+    }
+    setTimeout(() => { this._wheelDebounce = false; }, 400);
+  }
+
 
   override render() {
     const dots = [];
-    for (let i = 0; i < this._slideCount; i++) {
+    const maxIdx = this._getMaxIndex();
+    for (let i = 0; i <= maxIdx; i++) {
       dots.push(html`
         <button
           class="dot"
@@ -184,7 +248,9 @@ export class DkSectionTestimonialsCarousel extends DkSectionElement {
                 <h2 part="headline">${this.headline}</h2>
               </div>`
             : nothing}
-          <div class="carousel" part="carousel">
+          <div class="carousel" part="carousel"
+            @wheel=${this._onWheel}
+          >
             <div class="track" part="track" style="transform: ${this._getTrackTransform()}">
               <slot @slotchange=${this._onSlotChange}></slot>
             </div>

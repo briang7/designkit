@@ -9,8 +9,13 @@ const bgStyles = css`
     min-height: 100vh;
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 0;
     overflow: hidden;
+  }
+
+  section {
+    width: 100%;
   }
 
   .bg-image {
@@ -42,6 +47,8 @@ const bgStyles = css`
     align-items: center;
     padding: var(--dk-section-padding-y, 5rem) var(--dk-section-padding-x, 1.5rem);
     width: 100%;
+    max-width: var(--dk-section-max-width, 1200px);
+    margin: 0 auto;
   }
 
   h1 {

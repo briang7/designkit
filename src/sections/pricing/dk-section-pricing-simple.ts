@@ -91,6 +91,8 @@ const simpleStyles = css`
 export class DkSectionPricingSimple extends DkSectionElement {
   static override styles = [pricingBaseStyles, simpleStyles];
 
+  @property() headline = '';
+  @property() subheadline = '';
   @property() name = '';
   @property() price = '';
   @property() period = '';
@@ -106,6 +108,12 @@ export class DkSectionPricingSimple extends DkSectionElement {
     return html`
       <section part="section">
         <div class="container" part="container">
+          ${this.headline || this.subheadline
+            ? html`<div class="section-header animate-target" part="header">
+                ${this.headline ? html`<h2 part="headline">${this.headline}</h2>` : nothing}
+                ${this.subheadline ? html`<p class="subheadline" part="subheadline">${this.subheadline}</p>` : nothing}
+              </div>`
+            : nothing}
           <div class="card animate-target" part="card">
             ${this.name ? html`<h2 class="name" part="name">${this.name}</h2>` : nothing}
             <div class="price-row" part="price-row">

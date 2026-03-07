@@ -34,6 +34,12 @@ const simpleStyles = css`
     display: inline-block;
   }
 
+  .inline-links ::slotted(a) {
+    font-size: var(--dk-text-sm, 0.875rem);
+    color: var(--dk-color-text-muted, #6b7280);
+    text-decoration: none;
+  }
+
   .right {
     display: flex;
     align-items: center;

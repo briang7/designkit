@@ -38,44 +38,30 @@ export class DkSectionGalleryCarousel extends DkSectionElement {
 
   @property() headline = '';
 
-  private _isDragging = false;
-  private _startX = 0;
-  private _scrollLeft = 0;
-
-  private get _track(): HTMLElement | null {
-    return this.shadowRoot?.querySelector('.track') as HTMLElement | null;
-  }
-
-  private _onPointerDown = (e: PointerEvent) => {
-    const track = this._track;
-    if (!track) return;
-    this._isDragging = true;
-    this._startX = e.pageX - track.offsetLeft;
-    this._scrollLeft = track.scrollLeft;
-    track.style.cursor = 'grabbing';
-    track.setPointerCapture(e.pointerId);
-  };
-
-  private _onPointerMove = (e: PointerEvent) => {
-    if (!this._isDragging) return;
-    const track = this._track;
-    if (!track) return;
-    e.preventDefault();
-    const x = e.pageX - track.offsetLeft;
-    const walk = (x - this._startX) * 1.5;
-    track.scrollLeft = this._scrollLeft - walk;
-  };
-
-  private _onPointerUp = () => {
-    this._isDragging = false;
-    const track = this._track;
-    if (track) track.style.cursor = 'grab';
-  };
-
   protected override onEnterViewport() {
     const items = Array.from(this.querySelectorAll('dk-gallery-item'));
     this.animateEntrance(items);
   }
+
+  private _onWheel(e: WheelEvent) {
+    const track = this.shadowRoot?.querySelector('.track') as HTMLElement;
+    if (!track) return;
+    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    if (Math.abs(delta) < 5) return;
+    e.preventDefault();
+    // Disable snap and smooth scroll during gesture so they don't fight the input
+    track.style.scrollSnapType = 'none';
+    track.style.scrollBehavior = 'auto';
+    track.scrollLeft += delta;
+    // Re-enable after gesture settles
+    clearTimeout(this._snapTimer);
+    this._snapTimer = window.setTimeout(() => {
+      track.style.scrollBehavior = 'smooth';
+      track.style.scrollSnapType = 'x mandatory';
+    }, 200);
+  }
+
+  private _snapTimer?: number;
 
   override render() {
     return html`
@@ -84,15 +70,7 @@ export class DkSectionGalleryCarousel extends DkSectionElement {
           ${this.headline
             ? html`<div class="section-header"><h2 part="headline">${this.headline}</h2></div>`
             : nothing}
-          <div
-            class="track"
-            part="track"
-            style="cursor: grab"
-            @pointerdown=${this._onPointerDown}
-            @pointermove=${this._onPointerMove}
-            @pointerup=${this._onPointerUp}
-            @pointerleave=${this._onPointerUp}
-          >
+          <div class="track" part="track" @wheel=${this._onWheel}>
             <slot></slot>
           </div>
         </div>

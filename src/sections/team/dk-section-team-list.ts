@@ -13,6 +13,9 @@ const listStyles = css`
 
   ::slotted(dk-team-member) {
     --dk-team-card-direction: row;
+    --dk-team-image-aspect: 3/4;
+    --dk-team-image-max-height: none;
+    --dk-team-image-width: 200px;
   }
 
   /* Override member card for list layout via slotted */

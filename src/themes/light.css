@@ -1,5 +1,7 @@
-:root,
-.dk-light {
+/* Light theme defaults — wrapped in :where() for zero specificity.
+   Any user :root override wins automatically regardless of load order. */
+:where(:root),
+:where(.dk-light) {
   --dk-color-bg: var(--dk-white);
   --dk-color-surface: var(--dk-gray-50);
   --dk-color-surface-raised: var(--dk-white);

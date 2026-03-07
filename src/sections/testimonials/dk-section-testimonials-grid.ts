@@ -11,6 +11,13 @@ const gridStyles = css`
     gap: var(--dk-space-8, 2rem);
   }
 
+  ::slotted(*) {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: 100%;
+  }
+
   @media (max-width: 1024px) {
     .grid {
       grid-template-columns: repeat(2, 1fr);

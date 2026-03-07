@@ -14,18 +14,24 @@ const styles = css`
     background: var(--dk-color-surface, #ffffff);
     border: 1px solid var(--dk-color-border, #e5e7eb);
     text-align: center;
+    display: flex;
+    flex-direction: var(--dk-team-card-direction, column);
   }
 
   .image-wrapper {
     position: relative;
     overflow: hidden;
-    aspect-ratio: 1;
+    aspect-ratio: var(--dk-team-image-aspect, 1);
+    max-height: var(--dk-team-image-max-height, none);
+    width: var(--dk-team-image-width, auto);
+    flex-shrink: 0;
   }
 
   .image-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top center;
     display: block;
     transition: transform 0.3s ease;
   }

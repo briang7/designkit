@@ -99,7 +99,7 @@ export class DkSectionFaqTwoColumn extends DkSectionElement {
   @property() subheadline = '';
   @property({ type: Array }) items: FaqEntry[] = [];
 
-  @state() private _selectedIndex = -1;
+  @state() private _selectedIndex = 0;
 
   protected override onEnterViewport() {
     const btns = Array.from(this.shadowRoot?.querySelectorAll('.question-btn') ?? []);

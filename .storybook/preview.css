@@ -1,0 +1,9 @@
+/* Global resets for Storybook story rendering */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--dk-color-primary, #3b82f6);
+}

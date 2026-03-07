@@ -1,0 +1,521 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Guides/Custom Styling" />
+
+# Custom Styling Guide
+
+DesignKit components are built with **Shadow DOM**, which means their internal styles are encapsulated. You customize them through three mechanisms:
+
+1. **CSS Custom Properties** (`--dk-*`) — theme tokens that pierce the shadow boundary
+2. **CSS `::part()` selectors** — target specific internal elements by name
+3. **`style` attribute** — set custom properties inline on the element
+
+---
+
+## 1. CSS Custom Properties (Theme Tokens)
+
+Every component reads from a shared set of `--dk-*` tokens. Override them globally or on individual elements.
+
+### Global Theme Override
+
+```css
+:root {
+  --dk-color-primary: #9333ea;
+  --dk-color-primary-hover: #7e22ce;
+  --dk-color-text: #1a1a2e;
+  --dk-radius-md: 16px;
+  --dk-font-sans: 'Inter', sans-serif;
+}
+```
+
+### Per-Element Override
+
+```html
+<dk-section-hero-background
+  style="--dk-section-max-width: 800px; --dk-section-padding-y: 8rem;"
+  headline="Custom Spacing"
+/>
+```
+
+### Available Token Categories
+
+| Category | Examples | Description |
+|----------|---------|-------------|
+| **Colors** | `--dk-color-primary`, `--dk-color-text`, `--dk-color-bg` | Semantic color tokens |
+| **Spacing** | `--dk-space-1` through `--dk-space-16` | Consistent spacing scale (4px increments) |
+| **Typography** | `--dk-font-sans`, `--dk-font-size-display`, `--dk-leading-tight` | Font families, sizes, line heights |
+| **Radius** | `--dk-radius-sm`, `--dk-radius-md`, `--dk-radius-lg`, `--dk-radius-full` | Border radius scale |
+| **Shadows** | `--dk-shadow-sm`, `--dk-shadow-md`, `--dk-shadow-lg`, `--dk-shadow-xl` | Box shadow scale |
+| **Section Layout** | `--dk-section-padding-y`, `--dk-section-padding-x`, `--dk-section-max-width` | Section spacing and width |
+| **Animation** | `--dk-entrance-duration`, `--dk-entrance-distance`, `--dk-stagger-delay` | Motion timing |
+
+---
+
+## 2. CSS `::part()` Selectors
+
+Every meaningful element inside a component has a `part` attribute. Use `::part()` to style them from outside the shadow DOM.
+
+```css
+/* Center text on a split hero */
+dk-section-hero-split::part(content) {
+  text-align: center;
+  align-items: center;
+}
+
+/* Change overlay opacity on background hero */
+dk-section-hero-background::part(overlay) {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Style the pricing toggle */
+dk-section-pricing-tiers::part(toggle) {
+  background: #9333ea;
+}
+```
+
+### Common Part Names
+
+Most section components expose these parts:
+
+| Part | Description |
+|------|-------------|
+| `section` | Outermost `<section>` wrapper |
+| `container` | Max-width centered container |
+| `header` | Section header (headline + subheadline) |
+| `headline` | The `<h1>` or `<h2>` element |
+| `subheadline` | The subtitle `<p>` element |
+| `grid` | Grid/list layout wrapper |
+
+### Hero-Specific Parts
+
+| Part | background | split | centered |
+|------|-----------|-------|----------|
+| `section` | yes | yes | yes |
+| `container` | yes | yes | yes |
+| `headline` | yes | yes | yes |
+| `subheadline` | yes | yes | yes |
+| `badge` | yes | yes | yes |
+| `cta-group` | yes | yes | yes |
+| `overlay` | yes | | |
+| `bg-image` | yes | | |
+| `content` | | yes | |
+| `media` | | yes | |
+
+### Pricing-Specific Parts
+
+| Part | tiers | comparison | simple |
+|------|-------|------------|--------|
+| `toggle-row` | yes | yes | |
+| `toggle` | yes | yes | |
+| `grid` | yes | yes | |
+| `comparison-table` | | yes | |
+
+### Team Member Parts
+
+| Part | Description |
+|------|-------------|
+| `card` | Card wrapper |
+| `image-wrapper` | Image container |
+| `image` | The `<img>` element |
+| `social-overlay` | Hover social links overlay |
+| `info` | Text info container |
+| `name` | Member name |
+| `role` | Member role/title |
+| `bio` | Member bio text |
+
+---
+
+## 3. Framework Examples
+
+### Vanilla HTML
+
+```html
+<!-- Global theme via stylesheet -->
+<style>
+  :root {
+    --dk-color-primary: #e11d48;
+  }
+
+  /* Target specific component with class */
+  .my-hero::part(container) {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .my-hero::part(cta-group) {
+    justify-content: flex-start;
+  }
+</style>
+
+<!-- Inline custom properties -->
+<dk-section-hero-background
+  class="my-hero"
+  headline="Left-Aligned Hero"
+  image="hero.jpg"
+  style="--dk-section-max-width: 900px; --dk-section-padding-y: 6rem;"
+>
+  <dk-button slot="cta-primary" variant="primary">Get Started</dk-button>
+</dk-section-hero-background>
+```
+
+---
+
+### React / Next.js
+
+```tsx
+import '@briang7/designkit';
+import '@briang7/designkit/themes/tokens.css';
+import '@briang7/designkit/themes/light.css';
+
+// --- Custom properties inline (easiest) ---
+function HeroSection() {
+  return (
+    <dk-section-hero-background
+      headline="My Product"
+      subheadline="Ship faster with our platform."
+      image="/hero.jpg"
+      style={{
+        '--dk-section-max-width': '900px',
+        '--dk-section-padding-y': '6rem',
+        '--dk-color-primary': '#e11d48',
+      } as React.CSSProperties}
+    >
+      <dk-button slot="cta-primary" variant="primary">Get Started</dk-button>
+    </dk-section-hero-background>
+  );
+}
+
+// --- ::part() via scoped <style> tag ---
+function LeftAlignedHero() {
+  return (
+    <>
+      <style>{`
+        .left-hero::part(container) {
+          align-items: flex-start;
+          text-align: left;
+        }
+        .left-hero::part(cta-group) {
+          justify-content: flex-start;
+        }
+      `}</style>
+      <dk-section-hero-background
+        className="left-hero"
+        headline="Left-Aligned Hero"
+        image="/hero.jpg"
+      >
+        <dk-button slot="cta-primary" variant="primary">
+          Get Started
+        </dk-button>
+      </dk-section-hero-background>
+    </>
+  );
+}
+
+// --- ::part() via CSS Module ---
+// hero.module.css:
+//   .hero::part(container) { text-align: left; align-items: flex-start; }
+//   .hero::part(cta-group) { justify-content: flex-start; }
+import styles from './hero.module.css';
+
+function ModuleHero() {
+  return (
+    <dk-section-hero-background
+      className={styles.hero}
+      headline="Module Styled"
+      image="/hero.jpg"
+    >
+      <dk-button slot="cta-primary" variant="primary">Go</dk-button>
+    </dk-section-hero-background>
+  );
+}
+```
+
+**TypeScript note:** Add custom element types to avoid JSX errors:
+
+```ts
+// global.d.ts
+declare namespace JSX {
+  interface IntrinsicElements {
+    'dk-section-hero-background': React.DetailedHTMLProps<
+      React.HTMLAttributes<HTMLElement> & {
+        headline?: string;
+        subheadline?: string;
+        image?: string;
+        badge?: string;
+      },
+      HTMLElement
+    >;
+    'dk-button': React.DetailedHTMLProps<
+      React.HTMLAttributes<HTMLElement> & {
+        variant?: string;
+        size?: string;
+        slot?: string;
+      },
+      HTMLElement
+    >;
+    // ... other dk-* elements
+  }
+}
+```
+
+---
+
+### Vue 3
+
+```vue
+<script setup>
+import '@briang7/designkit';
+import '@briang7/designkit/themes/tokens.css';
+import '@briang7/designkit/themes/light.css';
+</script>
+
+<template>
+  <!-- Inline custom properties -->
+  <dk-section-hero-background
+    headline="My Product"
+    subheadline="Ship faster with our platform."
+    image="/hero.jpg"
+    :style="{
+      '--dk-section-max-width': '900px',
+      '--dk-section-padding-y': '6rem',
+      '--dk-color-primary': '#e11d48',
+    }"
+  >
+    <dk-button slot="cta-primary" variant="primary">Get Started</dk-button>
+  </dk-section-hero-background>
+
+  <!-- ::part() via scoped styles -->
+  <dk-section-hero-background
+    class="left-hero"
+    headline="Left-Aligned"
+    image="/hero.jpg"
+  >
+    <dk-button slot="cta-primary" variant="primary">Go</dk-button>
+  </dk-section-hero-background>
+</template>
+
+<!-- IMPORTANT: ::part() does NOT work with <style scoped> -->
+<!-- Use a non-scoped style block for ::part() selectors -->
+<style>
+.left-hero::part(container) {
+  align-items: flex-start;
+  text-align: left;
+}
+.left-hero::part(cta-group) {
+  justify-content: flex-start;
+}
+</style>
+```
+
+**Vite config** (required for Vue to recognize `dk-*` as custom elements):
+
+```ts
+// vite.config.ts
+import vue from '@vitejs/plugin-vue';
+
+export default defineConfig({
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.startsWith('dk-'),
+        },
+      },
+    }),
+  ],
+});
+```
+
+---
+
+### Angular
+
+```typescript
+// hero.component.ts
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import '@briang7/designkit';
+
+@Component({
+  selector: 'app-hero',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: `
+    <!-- Inline custom properties via ngStyle -->
+    <dk-section-hero-background
+      headline="My Product"
+      subheadline="Ship faster with our platform."
+      image="/hero.jpg"
+      [ngStyle]="{
+        '--dk-section-max-width': '900px',
+        '--dk-section-padding-y': '6rem',
+        '--dk-color-primary': '#e11d48'
+      }"
+    >
+      <dk-button slot="cta-primary" variant="primary">Get Started</dk-button>
+    </dk-section-hero-background>
+
+    <!-- ::part() via component styles -->
+    <dk-section-hero-background
+      class="left-hero"
+      headline="Left-Aligned"
+      image="/hero.jpg"
+    >
+      <dk-button slot="cta-primary" variant="primary">Go</dk-button>
+    </dk-section-hero-background>
+  `,
+  // IMPORTANT: use ViewEncapsulation.None for ::part() to work
+  // Or put ::part() styles in a global stylesheet
+  styleUrls: ['./hero.component.css'],
+  encapsulation: ViewEncapsulation.None,
+})
+export class HeroComponent {}
+```
+
+```css
+/* hero.component.css (with ViewEncapsulation.None) */
+.left-hero::part(container) {
+  align-items: flex-start;
+  text-align: left;
+}
+.left-hero::part(cta-group) {
+  justify-content: flex-start;
+}
+```
+
+Or in your global `styles.css`:
+
+```css
+/* styles.css - always works regardless of encapsulation */
+@import '@briang7/designkit/themes/tokens.css';
+@import '@briang7/designkit/themes/light.css';
+
+.left-hero::part(container) {
+  align-items: flex-start;
+  text-align: left;
+}
+```
+
+---
+
+## 4. Common Recipes
+
+### Center Everything (default for most sections)
+
+```css
+dk-section-hero-split::part(content) {
+  text-align: center;
+  align-items: center;
+}
+dk-section-hero-split::part(cta-group) {
+  justify-content: center;
+}
+```
+
+### Left-Align a Centered Section
+
+```css
+.my-section::part(container) {
+  align-items: flex-start;
+  text-align: left;
+}
+.my-section::part(cta-group) {
+  justify-content: flex-start;
+}
+```
+
+### Narrow Content Width
+
+```css
+dk-section-hero-background {
+  --dk-section-max-width: 800px;
+}
+```
+
+### Full-Width Content (no max-width)
+
+```css
+dk-section-features-grid {
+  --dk-section-max-width: 100%;
+}
+```
+
+### Custom Brand Colors
+
+```css
+:root {
+  --dk-color-primary: #9333ea;
+  --dk-color-primary-hover: #7e22ce;
+  --dk-color-primary-light: #faf5ff;
+  --dk-color-primary-text: #ffffff;
+}
+```
+
+### Adjust Section Spacing
+
+```css
+/* Tighter sections */
+dk-section-features-grid {
+  --dk-section-padding-y: 3rem;
+  --dk-section-gap: 2rem;
+}
+
+/* More breathing room */
+dk-section-hero-background {
+  --dk-section-padding-y: 8rem;
+}
+```
+
+### Custom Font
+
+```css
+:root {
+  --dk-font-sans: 'Poppins', sans-serif;
+  --dk-font-size-display: 4.5rem;
+  --dk-leading-tight: 1.1;
+}
+```
+
+### Dark Overlay on Hero Background
+
+```css
+.dark-hero::part(overlay) {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+}
+```
+
+### Rounded Cards
+
+```css
+:root {
+  --dk-radius-lg: 1.5rem;
+  --dk-radius-xl: 2rem;
+}
+```
+
+### Remove Entrance Animations
+
+```html
+<dk-section-hero-background no-animate headline="No animation" />
+```
+
+Or globally via CSS:
+
+```css
+:root {
+  --dk-entrance-duration: 0ms;
+}
+```
+
+---
+
+## 5. What You Can't Do (Shadow DOM Limitations)
+
+- **Cannot style arbitrary internal elements** — only elements with `part` attributes are exposed
+- **`::part()` cannot use combinators** — `::part(container) > h1` is invalid; use `::part(headline)` instead
+- **`::slotted()` only targets direct children** — nested elements inside a slot are not styleable from the component
+- **Vue `<style scoped>` blocks cannot reach `::part()`** — use an unscoped `<style>` block or global CSS
+
+When in doubt, use CSS custom properties — they always pierce shadow DOM boundaries.

@@ -4,7 +4,8 @@ import { DkElement } from '../../core/dk-element.js';
 
 const styles = css`
   :host {
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
 
   .card {
@@ -62,6 +63,12 @@ const styles = css`
     font-weight: var(--dk-font-extrabold, 800);
     color: var(--dk-color-text, #111827);
     line-height: 1;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .price.switching {
+    opacity: 0;
+    transform: translateY(-6px);
   }
 
   .period {
@@ -124,9 +131,18 @@ export class DkPricingTier extends DkElement {
   @property() name = '';
   @property() price = '';
   @property() period = '';
+  @property({ attribute: 'annual-price' }) annualPrice = '';
+  @property({ attribute: 'annual-period' }) annualPeriod = '';
   @property() description = '';
   @property({ type: Boolean, reflect: true }) featured = false;
+  @property({ type: Boolean, reflect: true }) annual = false;
   @property({ type: Array }) features: string[] = [];
+
+  private get _currentPeriod(): string {
+    if (this.annual && this.annualPeriod) return this.annualPeriod;
+    if (this.annual && this.annualPrice) return '/year';
+    return this.period;
+  }
 
   private _renderFeatureList() {
     if (this.features.length === 0) return nothing;
@@ -152,8 +168,8 @@ export class DkPricingTier extends DkElement {
         ${this.featured ? html`<span class="badge" part="badge">Most Popular</span>` : nothing}
         <h3 class="name" part="name">${this.name}</h3>
         <div class="price-row" part="price-row">
-          <span class="price" part="price">${this.price}</span>
-          ${this.period ? html`<span class="period" part="period">${this.period}</span>` : nothing}
+          <span class="price" part="price">${this.annual && this.annualPrice ? this.annualPrice : this.price}</span>
+          ${this._currentPeriod ? html`<span class="period" part="period">${this._currentPeriod}</span>` : nothing}
         </div>
         ${this.description ? html`<p class="description" part="description">${this.description}</p>` : nothing}
         <hr class="divider" />

@@ -1,10 +1,11 @@
 import { css } from 'lit';
 import { reducedMotion } from '../../core/animations.js';
+import { dkLinkReset } from '../../core/dk-element.js';
 
 export const contactBaseStyles = css`
   :host {
     display: block;
-    padding: var(--dk-section-padding-y, 5rem) var(--dk-section-padding-x, 1.5rem);
+    padding: var(--dk-section-padding-y, 5rem) var(--dk-section-padding-x, 1.5rem) !important;
   }
 
   .container {
@@ -110,7 +111,13 @@ export const contactBaseStyles = css`
 
   .animate-target {
     opacity: 0;
+    animation: dk-reveal 0.01s 1s forwards;
+  }
+
+  @keyframes dk-reveal {
+    to { opacity: 1; }
   }
 
   ${reducedMotion}
+  ${dkLinkReset}
 `;

@@ -4,6 +4,7 @@ import { withThemeByClassName } from '@storybook/addon-themes';
 import '../src/themes/tokens.css';
 import '../src/themes/light.css';
 import '../src/themes/dark.css';
+import './preview.css';
 
 const preview: Preview = {
   parameters: {

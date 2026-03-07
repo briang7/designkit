@@ -4,6 +4,8 @@ import { reducedMotion, spin } from '../../core/animations.js';
 export const buttonStyles = css`
   :host {
     display: inline-block;
+    border-radius: var(--dk-radius-md);
+    overflow: hidden;
   }
 
   :host([disabled]) {

@@ -4,7 +4,9 @@ import { DkElement } from '../../core/dk-element.js';
 
 const styles = css`
   :host {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 
   .card {
@@ -15,7 +17,8 @@ const styles = css`
     background: var(--dk-color-surface, #ffffff);
     border: 1px solid var(--dk-color-border, #e5e7eb);
     border-radius: var(--dk-radius-xl, 1rem);
-    height: 100%;
+    flex: 1;
+    box-sizing: border-box;
   }
 
   .quote {

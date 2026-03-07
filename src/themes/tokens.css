@@ -141,3 +141,13 @@
   /* Navbar */
   --dk-navbar-height: 64px;
 }
+
+/* Base link reset — removes default blue/underline from all links inside DesignKit components */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--dk-color-primary, #3b82f6);
+}

@@ -5,35 +5,46 @@ import { footerBaseStyles } from './dk-section-footer.styles.js';
 import './dk-footer-helpers.js';
 
 const columnsStyles = css`
-  .grid {
-    display: grid;
-    grid-template-columns: 2fr repeat(auto-fit, minmax(140px, 1fr));
-    gap: var(--dk-space-8, 2rem);
+  .top {
+    display: flex;
+    gap: var(--dk-space-12, 3rem);
   }
 
   .brand-col {
     display: flex;
     flex-direction: column;
     gap: var(--dk-space-4, 1rem);
+    flex: 0 0 280px;
   }
 
   .columns {
-    display: contents;
+    flex: 1;
+  }
+
+  /* The slotted wrapper div becomes a multi-column grid */
+  ::slotted(div) {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 2rem !important;
   }
 
   @media (max-width: 768px) {
-    .grid {
-      grid-template-columns: 1fr 1fr;
+    .top {
+      flex-direction: column;
     }
 
     .brand-col {
-      grid-column: 1 / -1;
+      flex: none;
+    }
+
+    ::slotted(div) {
+      grid-template-columns: repeat(2, 1fr) !important;
     }
   }
 
   @media (max-width: 480px) {
-    .grid {
-      grid-template-columns: 1fr;
+    ::slotted(div) {
+      grid-template-columns: 1fr !important;
     }
   }
 `;
@@ -57,7 +68,7 @@ export class DkSectionFooterColumns extends DkSectionElement {
     return html`
       <footer part="footer">
         <div class="container" part="container">
-          <div class="grid" part="grid">
+          <div class="top" part="top">
             <div class="brand-col" part="brand-col">
               <slot name="logo">
                 <p class="brand-name" part="brand-name">${this.brand}</p>

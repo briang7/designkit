@@ -1,4 +1,6 @@
-.dk-dark {
+/* Dark theme defaults — wrapped in :where() for zero specificity.
+   Any user .dk-dark override wins automatically regardless of load order. */
+:where(.dk-dark) {
   --dk-color-bg: var(--dk-gray-950);
   --dk-color-surface: var(--dk-gray-900);
   --dk-color-surface-raised: var(--dk-gray-800);

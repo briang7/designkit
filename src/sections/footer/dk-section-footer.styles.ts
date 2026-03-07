@@ -1,10 +1,11 @@
 import { css } from 'lit';
 import { reducedMotion } from '../../core/animations.js';
+import { dkLinkReset } from '../../core/dk-element.js';
 
 export const footerBaseStyles = css`
   :host {
     display: block;
-    padding: var(--dk-section-padding-y, 3rem) var(--dk-section-padding-x, 1.5rem);
+    padding: var(--dk-section-padding-y, 3rem) var(--dk-section-padding-x, 1.5rem) !important;
     background: var(--dk-footer-bg, var(--dk-color-surface-alt, #f9fafb));
     border-top: 1px solid var(--dk-color-border, #e5e7eb);
   }
@@ -53,4 +54,5 @@ export const footerBaseStyles = css`
   }
 
   ${reducedMotion}
+  ${dkLinkReset}
 `;

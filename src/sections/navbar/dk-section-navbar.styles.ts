@@ -1,5 +1,6 @@
 import { css } from 'lit';
 import { reducedMotion } from '../../core/animations.js';
+import { dkLinkReset } from '../../core/dk-element.js';
 
 export const navbarBaseStyles = css`
   :host {
@@ -52,7 +53,7 @@ export const navbarBaseStyles = css`
   .links {
     display: flex;
     align-items: center;
-    gap: var(--dk-space-1, 0.25rem);
+    gap: var(--dk-space-2, 0.5rem);
     flex: 1;
     justify-content: center;
   }
@@ -187,4 +188,5 @@ export const navbarBaseStyles = css`
   }
 
   ${reducedMotion}
+  ${dkLinkReset}
 `;

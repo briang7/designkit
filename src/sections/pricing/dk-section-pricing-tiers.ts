@@ -62,7 +62,7 @@ const tiersStyles = css`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--dk-space-8, 2rem);
-    align-items: start;
+    align-items: stretch;
   }
 
   @media (max-width: 1024px) {
@@ -93,7 +93,15 @@ export class DkSectionPricingTiers extends DkSectionElement {
 
   private _toggleBilling() {
     this._annual = !this._annual;
+    this._updateTiers();
     this.emitEvent('dk-billing-toggle', { annual: this._annual });
+  }
+
+  private _updateTiers() {
+    const tiers = this.querySelectorAll('dk-pricing-tier');
+    tiers.forEach(tier => {
+      (tier as any).annual = this._annual;
+    });
   }
 
   protected override onEnterViewport() {
@@ -115,7 +123,7 @@ export class DkSectionPricingTiers extends DkSectionElement {
             <span
               class="toggle-label"
               ?data-active=${!this._annual}
-              @click=${() => { this._annual = false; this.emitEvent('dk-billing-toggle', { annual: false }); }}
+              @click=${() => { this._annual = false; this._updateTiers(); this.emitEvent('dk-billing-toggle', { annual: false }); }}
             >${this.monthlyLabel}</span>
             <button
               class="toggle-track"
@@ -129,7 +137,7 @@ export class DkSectionPricingTiers extends DkSectionElement {
             <span
               class="toggle-label"
               ?data-active=${this._annual}
-              @click=${() => { this._annual = true; this.emitEvent('dk-billing-toggle', { annual: true }); }}
+              @click=${() => { this._annual = true; this._updateTiers(); this.emitEvent('dk-billing-toggle', { annual: true }); }}
             >${this.annualLabel}</span>
           </div>
           <div class="grid" part="grid">

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DesignKit v2 Demo - Full Landing Page</title>
+  <link rel="stylesheet" href="src/themes/tokens.css">
+  <link rel="stylesheet" href="src/themes/light.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      color: var(--dk-color-text, #111827);
+      background: var(--dk-color-surface, #ffffff);
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    a:hover {
+      color: var(--dk-color-primary, #3b82f6);
+    }
+    /* Helper for slotted nav links */
+    .nav-link {
+      text-decoration: none;
+      color: var(--dk-color-text, #111827);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    .nav-link:hover { color: var(--dk-color-primary, #3b82f6); }
+  </style>
+
+  <!-- Import all components via source (uses Vite dev server) -->
+  <script type="module">
+    // Core primitives
+    import './src/components/button/dk-button.js';
+    import './src/components/input/dk-input.js';
+    import './src/components/card/dk-card.js';
+    import './src/components/badge/dk-badge.js';
+    import './src/components/avatar/dk-avatar.js';
+
+    // Signature components
+    import './src/signature/skeleton/dk-skeleton.js';
+    import './src/signature/command/dk-command.js';
+    import './src/signature/command/dk-command-item.js';
+    import './src/signature/command/dk-command-group.js';
+    import './src/signature/form/dk-form.js';
+
+    // Sections
+    import './src/sections/navbar/index.js';
+    import './src/sections/hero/index.js';
+    import './src/sections/features/index.js';
+    import './src/sections/stats/index.js';
+    import './src/sections/testimonials/index.js';
+    import './src/sections/pricing/index.js';
+    import './src/sections/cta/index.js';
+    import './src/sections/faq/index.js';
+    import './src/sections/newsletter/index.js';
+    import './src/sections/footer/index.js';
+    import './src/sections/gallery/index.js';
+    import './src/sections/team/index.js';
+    import './src/sections/contact/index.js';
+    import './src/sections/sidebar/index.js';
+  </script>
+</head>
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <dk-section-navbar-simple brand="DesignKit" sticky>
+    <a slot="links" class="nav-link" href="#features">Features</a>
+    <a slot="links" class="nav-link" href="#pricing">Pricing</a>
+    <a slot="links" class="nav-link" href="#testimonials">Testimonials</a>
+    <a slot="links" class="nav-link" href="#faq">FAQ</a>
+    <dk-button slot="cta" size="sm">Get Started</dk-button>
+  </dk-section-navbar-simple>
+
+  <!-- ============ HERO ============ -->
+  <dk-section-hero-centered
+    headline="Build Beautiful UIs with DesignKit"
+    subheadline="A premium Lit web component library with 50+ animated components, ready-made sections, and a powerful design token system."
+    badge="v2.0 Now Available"
+  >
+    <dk-button slot="cta-primary" variant="primary" size="lg">Start Building</dk-button>
+    <dk-button slot="cta-secondary" variant="secondary" size="lg">View Docs</dk-button>
+  </dk-section-hero-centered>
+
+  <!-- ============ FEATURES ============ -->
+  <div id="features"></div>
+  <dk-section-features-grid
+    headline="Everything You Need"
+    subheadline="Production-ready components with animations baked in."
+    bg="alt"
+  >
+    <dk-feature-card icon="lightning" title="Lightning Fast" description="Motion One powered animations at just 4KB. Spring physics, stagger effects, and reduced motion support."></dk-feature-card>
+    <dk-feature-card icon="layers" title="50+ Components" description="14 primitives, 3 signature components, and 36 section variants. All accessible and themeable."></dk-feature-card>
+    <dk-feature-card icon="code" title="Framework Agnostic" description="Built on Lit web components. Works with React, Vue, Svelte, Angular, or vanilla HTML."></dk-feature-card>
+    <dk-feature-card icon="shield" title="Type Safe" description="Full TypeScript declarations. IntelliSense in every editor. Complete API documentation."></dk-feature-card>
+    <dk-feature-card icon="settings" title="Design Tokens" description="CSS custom properties for everything. Light and dark themes included. Easy to customize."></dk-feature-card>
+    <dk-feature-card icon="globe" title="Tree Shakeable" description="Sub-path imports for each component. Only bundle what you use. Zero bloat."></dk-feature-card>
+  </dk-section-features-grid>
+
+  <!-- ============ STATS ============ -->
+  <dk-section-stats-bar>
+    <dk-stat value="50" suffix="+" label="Components"></dk-stat>
+    <dk-stat value="194" label="Tests Passing"></dk-stat>
+    <dk-stat value="4" suffix="KB" label="Animation Runtime"></dk-stat>
+    <dk-stat value="14" label="Section Types"></dk-stat>
+  </dk-section-stats-bar>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <div id="testimonials"></div>
+  <dk-section-testimonials-grid
+    headline="Loved by Developers"
+    subheadline="See what teams are saying about DesignKit."
+    bg="alt"
+  >
+    <dk-testimonial-card
+      quote="DesignKit cut our landing page build time in half. The section components are incredibly polished."
+      author="Sarah Chen"
+      role="Frontend Lead, Acme Inc"
+      rating="5"
+    ></dk-testimonial-card>
+    <dk-testimonial-card
+      quote="Finally a component library that takes animations seriously. The spring physics feel amazing."
+      author="Marcus Johnson"
+      role="Design Engineer, Startup Co"
+      rating="5"
+    ></dk-testimonial-card>
+    <dk-testimonial-card
+      quote="We migrated from a React-only library. DesignKit works everywhere - our Vue and Svelte apps too."
+      author="Priya Patel"
+      role="CTO, DevTools Inc"
+      rating="4"
+    ></dk-testimonial-card>
+  </dk-section-testimonials-grid>
+
+  <!-- ============ PRICING ============ -->
+  <div id="pricing"></div>
+  <dk-section-pricing-tiers
+    headline="Simple, Transparent Pricing"
+    subheadline="Choose the plan that fits your team."
+  >
+    <dk-pricing-tier
+      name="Starter"
+      price="$0"
+      period="/month"
+      description="Perfect for side projects and learning."
+      features='["14 primitive components", "Light &amp; dark themes", "CSS design tokens", "MIT License"]'
+    >
+      <dk-button slot="cta" variant="secondary" style="width:100%">Get Started Free</dk-button>
+    </dk-pricing-tier>
+    <dk-pricing-tier
+      name="Pro"
+      price="$29"
+      period="/month"
+      description="For teams building production apps."
+      featured
+      features='["Everything in Starter", "36 section components", "3 signature components", "Priority support", "Figma tokens"]'
+    >
+      <dk-button slot="cta" variant="primary" style="width:100%">Start Free Trial</dk-button>
+    </dk-pricing-tier>
+    <dk-pricing-tier
+      name="Enterprise"
+      price="$99"
+      period="/month"
+      description="For large teams with custom needs."
+      features='["Everything in Pro", "Custom theme builder", "Dedicated support", "SLA guarantee", "Source code access"]'
+    >
+      <dk-button slot="cta" variant="secondary" style="width:100%">Contact Sales</dk-button>
+    </dk-pricing-tier>
+  </dk-section-pricing-tiers>
+
+  <!-- ============ CTA ============ -->
+  <dk-section-cta-centered
+    headline="Ready to Build Something Beautiful?"
+    description="Get started with DesignKit in under 5 minutes. npm install, import, and go."
+    bg="brand"
+  >
+    <dk-button slot="cta" variant="secondary" size="lg">npm install @briang7/designkit</dk-button>
+  </dk-section-cta-centered>
+
+  <!-- ============ FAQ ============ -->
+  <div id="faq"></div>
+  <dk-section-faq-accordion
+    headline="Frequently Asked Questions"
+    subheadline="Everything you need to know about DesignKit."
+  >
+    <dk-faq-item question="What frameworks does DesignKit support?">
+      DesignKit is built on Lit web components, which means it works with any framework or no framework at all. We have tested integrations with React, Vue, Svelte, Angular, and vanilla HTML.
+    </dk-faq-item>
+    <dk-faq-item question="How do the animations work?">
+      DesignKit uses Motion One (~4KB) for spring physics and imperative animations. All animations respect the prefers-reduced-motion media query. Static animations like shimmer and spinner use pure CSS.
+    </dk-faq-item>
+    <dk-faq-item question="Can I customize the design tokens?">
+      Yes! All visual properties are controlled via CSS custom properties. Override any --dk-* token in your stylesheet to match your brand. Light and dark themes are included and easy to extend.
+    </dk-faq-item>
+    <dk-faq-item question="Is it accessible?">
+      Every component follows WAI-ARIA patterns. Focus management, keyboard navigation, screen reader support, and reduced motion are built in from the start.
+    </dk-faq-item>
+    <dk-faq-item question="How big is the bundle?">
+      The full primitive library is under 30KB gzipped. Section components are tree-shakeable via sub-path imports, so you only pay for what you use.
+    </dk-faq-item>
+  </dk-section-faq-accordion>
+
+  <!-- ============ NEWSLETTER ============ -->
+  <dk-section-newsletter-inline
+    headline="Stay Updated"
+    description="Get notified about new components, updates, and tips."
+    bg="alt"
+  ></dk-section-newsletter-inline>
+
+  <!-- ============ GALLERY ============ -->
+  <dk-section-gallery-grid headline="Gallery">
+    <dk-gallery-item src="https://picsum.photos/seed/dk1/600/450" alt="Abstract design" caption="Abstract gradient composition"></dk-gallery-item>
+    <dk-gallery-item src="https://picsum.photos/seed/dk2/600/450" alt="Architecture" caption="Modern architecture detail"></dk-gallery-item>
+    <dk-gallery-item src="https://picsum.photos/seed/dk3/600/450" alt="Nature" caption="Mountain landscape at sunset"></dk-gallery-item>
+    <dk-gallery-item src="https://picsum.photos/seed/dk4/600/450" alt="Technology" caption="Developer workspace setup"></dk-gallery-item>
+    <dk-gallery-item src="https://picsum.photos/seed/dk5/600/450" alt="City" caption="Urban skyline at night"></dk-gallery-item>
+    <dk-gallery-item src="https://picsum.photos/seed/dk6/600/450" alt="Minimal" caption="Minimalist interior design"></dk-gallery-item>
+  </dk-section-gallery-grid>
+
+  <!-- ============ TEAM ============ -->
+  <dk-section-team-grid
+    headline="Meet Our Team"
+    subheadline="The people behind DesignKit."
+    bg="alt"
+  >
+    <dk-team-member
+      name="Alex Rivera"
+      role="Lead Engineer"
+      image="https://i.pravatar.cc/400?img=11"
+      bio="Full-stack developer with a passion for design systems and web components."
+    ></dk-team-member>
+    <dk-team-member
+      name="Jordan Lee"
+      role="Design Lead"
+      image="https://i.pravatar.cc/400?img=32"
+      bio="Former Figma designer turned component architect. Obsessed with micro-interactions."
+    ></dk-team-member>
+    <dk-team-member
+      name="Sam Taylor"
+      role="Developer Advocate"
+      image="https://i.pravatar.cc/400?img=48"
+      bio="Writes docs, builds demos, and helps teams adopt DesignKit in production."
+    ></dk-team-member>
+  </dk-section-team-grid>
+
+  <!-- ============ CONTACT ============ -->
+  <dk-section-contact-split
+    headline="Get in Touch"
+    subheadline="Have a question or want to learn more? Drop us a message."
+    email="hello@designkit.dev"
+    phone="+1 (555) 123-4567"
+    address="123 Component Lane, San Francisco, CA 94105"
+  ></dk-section-contact-split>
+
+  <!-- ============ SIDEBAR (standalone demo) ============ -->
+  <section style="padding: 80px 24px; max-width: 1280px; margin: 0 auto;">
+    <h2 style="text-align: center; font-size: 2.25rem; font-weight: 800; margin-bottom: 0.5rem;">Sidebar Navigation</h2>
+    <p style="text-align: center; color: var(--dk-color-text-muted); margin-bottom: 3rem;">A collapsible sidebar component for app layouts.</p>
+    <div style="display: flex; border: 1px solid var(--dk-color-border, #e5e7eb); border-radius: 1rem; overflow: hidden; height: 400px;">
+      <dk-section-sidebar-nav>
+        <dk-sidebar-group label="Main">
+          <dk-sidebar-item icon="&#x1F3E0;" label="Dashboard" active></dk-sidebar-item>
+          <dk-sidebar-item icon="&#x1F4CA;" label="Analytics" badge="3"></dk-sidebar-item>
+          <dk-sidebar-item icon="&#x1F4C1;" label="Projects"></dk-sidebar-item>
+          <dk-sidebar-item icon="&#x1F465;" label="Team"></dk-sidebar-item>
+        </dk-sidebar-group>
+        <dk-sidebar-group label="Settings" collapsible>
+          <dk-sidebar-item icon="&#x2699;" label="General"></dk-sidebar-item>
+          <dk-sidebar-item icon="&#x1F512;" label="Security"></dk-sidebar-item>
+          <dk-sidebar-item icon="&#x1F514;" label="Notifications"></dk-sidebar-item>
+        </dk-sidebar-group>
+      </dk-section-sidebar-nav>
+      <div style="flex: 1; padding: 2rem; display: flex; align-items: center; justify-content: center; color: var(--dk-color-text-muted);">
+        Main content area
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SIGNATURE COMPONENTS SHOWCASE ============ -->
+  <section style="padding: 80px 24px; max-width: 1280px; margin: 0 auto;">
+    <h2 style="text-align: center; font-size: 2.25rem; font-weight: 800; margin-bottom: 0.5rem;">Signature Components</h2>
+    <p style="text-align: center; color: var(--dk-color-text-muted); margin-bottom: 3rem;">Three premium components that set DesignKit apart.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 2rem;">
+      <!-- Skeleton -->
+      <dk-card>
+        <div slot="header">dk-skeleton</div>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <dk-skeleton variant="text" lines="3"></dk-skeleton>
+          <div style="display: flex; gap: 1rem; align-items: center;">
+            <dk-skeleton variant="circle"></dk-skeleton>
+            <dk-skeleton variant="text" width="60%"></dk-skeleton>
+          </div>
+          <dk-skeleton variant="rect" height="100px"></dk-skeleton>
+        </div>
+      </dk-card>
+
+      <!-- Command Palette -->
+      <dk-card>
+        <div slot="header">dk-command</div>
+        <p style="margin-bottom: 1rem; color: var(--dk-color-text-muted); font-size: 0.875rem;">
+          Press <kbd style="background: var(--dk-color-neutral-100); padding: 2px 6px; border-radius: 4px; font-size: 0.75rem;">Ctrl+K</kbd> to open
+        </p>
+        <dk-button variant="secondary" onclick="document.querySelector('dk-command').show()">Open Command Palette</dk-button>
+      </dk-card>
+
+      <!-- Form -->
+      <dk-card>
+        <div slot="header">dk-form</div>
+        <dk-form>
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <dk-input label="Name" name="name" required></dk-input>
+            <dk-input label="Email" name="email" type="email" required></dk-input>
+            <dk-button type="submit">Submit</dk-button>
+          </div>
+        </dk-form>
+      </dk-card>
+    </div>
+  </section>
+
+  <!-- Command Palette (global, opens with Ctrl+K) -->
+  <dk-command placeholder="Type a command...">
+    <dk-command-group heading="Navigation">
+      <dk-command-item value="home">Home</dk-command-item>
+      <dk-command-item value="features">Features</dk-command-item>
+      <dk-command-item value="pricing">Pricing</dk-command-item>
+      <dk-command-item value="docs">Documentation</dk-command-item>
+    </dk-command-group>
+    <dk-command-group heading="Actions">
+      <dk-command-item value="theme">Toggle Theme</dk-command-item>
+      <dk-command-item value="search">Search Components</dk-command-item>
+      <dk-command-item value="github">Open GitHub</dk-command-item>
+    </dk-command-group>
+  </dk-command>
+
+  <!-- ============ FOOTER ============ -->
+  <dk-section-footer-columns
+    brand="DesignKit"
+    description="A premium Lit web component library for building beautiful, animated interfaces."
+    copyright="&copy; 2026 DesignKit. All rights reserved."
+    bg="dark"
+  >
+    <dk-footer-column slot="columns" heading="Product">
+      <dk-footer-link href="#">Components</dk-footer-link>
+      <dk-footer-link href="#">Sections</dk-footer-link>
+      <dk-footer-link href="#">Themes</dk-footer-link>
+      <dk-footer-link href="#">Pricing</dk-footer-link>
+    </dk-footer-column>
+    <dk-footer-column slot="columns" heading="Resources">
+      <dk-footer-link href="#">Documentation</dk-footer-link>
+      <dk-footer-link href="#">Storybook</dk-footer-link>
+      <dk-footer-link href="#">GitHub</dk-footer-link>
+      <dk-footer-link href="#">Changelog</dk-footer-link>
+    </dk-footer-column>
+    <dk-footer-column slot="columns" heading="Company">
+      <dk-footer-link href="#">About</dk-footer-link>
+      <dk-footer-link href="#">Blog</dk-footer-link>
+      <dk-footer-link href="#">Careers</dk-footer-link>
+      <dk-footer-link href="#">Contact</dk-footer-link>
+    </dk-footer-column>
+  </dk-section-footer-columns>
+
+  <script type="module">
+    // Log events for demo
+    document.addEventListener('dk-subscribe', (e) => {
+      console.log('Newsletter subscribe:', e.detail);
+      alert('Subscribed: ' + e.detail.email);
+    });
+    document.addEventListener('dk-submit', (e) => {
+      console.log('Form submit:', e.detail);
+      if (e.detail.valid) alert('Form submitted: ' + JSON.stringify(e.detail.values));
+    });
+    document.addEventListener('dk-select', (e) => {
+      console.log('Command selected:', e.detail);
+    });
+    document.addEventListener('dk-contact-submit', (e) => {
+      console.log('Contact form:', e.detail);
+      alert('Message sent! ' + JSON.stringify(e.detail));
+    });
+  </script>
+
+</body>
+</html>
