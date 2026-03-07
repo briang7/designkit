@@ -1,0 +1,130 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Sections Guide" />
+
+# Sections Guide
+
+DesignKit sections are full-width, composable page blocks for building landing pages, dashboards, and multi-page sites. Each section is a self-contained web component with responsive layout, entrance animations, and theme integration.
+
+## Section Types
+
+| Type | Variants | Import Path |
+|------|----------|-------------|
+| Navbar | Simple, With Search, Mega | `./sections/navbar` |
+| Hero | Centered, Split, Background | `./sections/hero` |
+| Footer | Simple, Columns | `./sections/footer` |
+| Features | Grid, Alternating, Centered | `./sections/features` |
+| Testimonials | Grid, Carousel | `./sections/testimonials` |
+| CTA | Centered, Split | `./sections/cta` |
+| Stats | Bar, Cards | `./sections/stats` |
+| Pricing | Tiers, Comparison, Simple | `./sections/pricing` |
+| FAQ | Accordion, Two Column | `./sections/faq` |
+| Newsletter | Inline, Card | `./sections/newsletter` |
+| Gallery | Grid, Carousel | `./sections/gallery` |
+| Sidebar | Nav, Brand | `./sections/sidebar` |
+| Team | Grid, List | `./sections/team` |
+| Contact | Split, Centered | `./sections/contact` |
+
+## Composing Sections
+
+Sections are designed to stack vertically. Each section handles its own padding, max-width, and responsive breakpoints.
+
+```html
+<dk-section-navbar-simple brand="Acme" sticky>
+  <a slot="links" href="/">Home</a>
+  <a slot="links" href="/about">About</a>
+</dk-section-navbar-simple>
+
+<dk-section-hero-split
+  headline="Welcome to Acme"
+  subheadline="We build things."
+>
+  <img slot="media" src="/hero.jpg" alt="Hero" />
+</dk-section-hero-split>
+
+<dk-section-stats-cards>
+  <dk-stat label="Users" value="10k+"></dk-stat>
+  <dk-stat label="Revenue" value="$2M"></dk-stat>
+  <dk-stat label="Uptime" value="99.9%"></dk-stat>
+</dk-section-stats-cards>
+
+<dk-section-footer-columns brand="Acme">
+  <dk-footer-column title="Product">
+    <dk-footer-link href="/features">Features</dk-footer-link>
+    <dk-footer-link href="/pricing">Pricing</dk-footer-link>
+  </dk-footer-column>
+</dk-section-footer-columns>
+```
+
+## DkSectionElement Base Class
+
+All sections extend `DkSectionElement`, which provides shared props:
+
+| Property | Attribute | Type | Default | Description |
+|----------|-----------|------|---------|-------------|
+| `bg` | `bg` | `'primary' \| 'alt' \| 'brand' \| 'dark'` | `'primary'` | Background color scheme |
+| `noAnimate` | `no-animate` | `boolean` | `false` | Disable entrance animations |
+
+### Background Variants
+
+```html
+<!-- Default background -->
+<dk-section-hero-centered bg="primary" headline="..."></dk-section-hero-centered>
+
+<!-- Alternating background for visual separation -->
+<dk-section-features-grid bg="alt" headline="..."></dk-section-features-grid>
+
+<!-- Brand-colored background -->
+<dk-section-cta-centered bg="brand" headline="..."></dk-section-cta-centered>
+
+<!-- Dark background -->
+<dk-section-stats-bar bg="dark"></dk-section-stats-bar>
+```
+
+## Responsive Behavior
+
+Sections use CSS container queries and responsive breakpoints:
+
+- **Mobile** (< 640px): Single column, stacked layout
+- **Tablet** (640px - 1024px): Two-column grids, adjusted spacing
+- **Desktop** (> 1024px): Full multi-column layouts
+
+Grid-based sections (features, pricing, team, gallery) automatically adjust column count. Split layouts (hero-split, cta-split, contact-split) stack vertically on mobile.
+
+## Customizing with CSS Custom Properties
+
+Override section-level tokens for a custom look:
+
+```css
+/* Change section padding */
+:root {
+  --dk-section-padding-y: 5rem;
+  --dk-section-padding-x: 2rem;
+  --dk-section-max-width: 1280px;
+}
+
+/* Customize specific section types */
+dk-section-hero-centered {
+  --dk-hero-min-height: 80vh;
+}
+
+dk-section-pricing-tiers {
+  --dk-pricing-highlight-color: var(--dk-color-primary);
+}
+```
+
+## Helper Components
+
+Some section types include helper child components:
+
+- **Features**: `<dk-feature-card>` and `<dk-feature-row>`
+- **Testimonials**: `<dk-testimonial-card>`
+- **FAQ**: `<dk-faq-item>`
+- **Pricing**: `<dk-pricing-tier>`
+- **Stats**: `<dk-stat>`
+- **Gallery**: `<dk-gallery-item>`
+- **Sidebar**: `<dk-sidebar-item>`, `<dk-sidebar-group>`
+- **Footer**: `<dk-footer-column>`, `<dk-footer-link>`, `<dk-footer-social>`
+- **Team**: `<dk-team-member>`
+
+These helpers are exported alongside their parent section from the same import path.

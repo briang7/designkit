@@ -42,3 +42,43 @@ Import individual components for smaller bundles:
 import '@briang7/designkit/button';
 import '@briang7/designkit/input';
 ```
+
+## Using Sections
+
+Import individual section types:
+
+```js
+import '@briang7/designkit/sections/hero';
+import '@briang7/designkit/sections/features';
+```
+
+Or import all sections:
+
+```js
+import '@briang7/designkit/sections';
+```
+
+### Build a Landing Page
+
+```html
+<dk-section-navbar-simple brand="MyApp" sticky>
+  <a slot="links" href="#features">Features</a>
+  <a slot="links" href="#pricing">Pricing</a>
+  <dk-button slot="cta" variant="primary">Get Started</dk-button>
+</dk-section-navbar-simple>
+
+<dk-section-hero-centered
+  headline="Build faster"
+  subheadline="Ship in days, not months."
+>
+  <dk-button slot="cta-primary" variant="primary" size="lg">Start Free</dk-button>
+</dk-section-hero-centered>
+
+<dk-section-features-grid headline="Everything you need">
+  <dk-feature-card icon="lightning" title="Fast" description="Blazing performance"></dk-feature-card>
+  <dk-feature-card icon="shield" title="Secure" description="Built-in security"></dk-feature-card>
+  <dk-feature-card icon="puzzle" title="Modular" description="Use what you need"></dk-feature-card>
+</dk-section-features-grid>
+
+<dk-section-footer-simple brand="MyApp"></dk-section-footer-simple>
+```

@@ -1,0 +1,109 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Animations" />
+
+# Animations
+
+DesignKit uses [Motion One](https://motion.dev/) for performant, hardware-accelerated animations. Animations are layered into two categories: **micro-interactions** on primitive components and **entrance animations** on section components.
+
+## Motion One Integration
+
+Motion One is a lightweight animation library (~3.5KB gzip) that uses the Web Animations API under the hood. DesignKit wraps it with three core utilities:
+
+### `dkAnimate(el, keyframes, options)`
+
+Standard keyframe animation with sensible defaults (0.25s duration). Used for micro-interactions like button presses, tooltip reveals, and dialog transitions.
+
+### `dkSpring(el, keyframes, options)`
+
+Spring-physics animation with configurable stiffness, damping, and mass. Used for interactive feedback like switch toggles and checkbox checks.
+
+### `dkStagger(els, keyframes, options)`
+
+Staggered animation across a group of elements. Used for section entrance animations where children appear sequentially.
+
+## Primitive Micro-Interactions
+
+Primitive components have built-in micro-interactions:
+
+| Component | Animation | Trigger |
+|-----------|-----------|---------|
+| Button | Scale press (0.97x) | Click/active state |
+| Switch | Spring toggle | Value change |
+| Checkbox | Spring scale | Check/uncheck |
+| Dialog | Fade + scale in/out | Open/close |
+| Drawer | Slide from edge | Open/close |
+| Toast | Slide in + fade out | Show/dismiss |
+| Tooltip | Fade + slight translate | Hover enter/leave |
+| Tabs | Indicator slide | Tab switch |
+
+## Section Entrance Animations
+
+Sections use `IntersectionObserver` to trigger entrance animations when they scroll into view. The base `DkSectionElement` class handles this automatically:
+
+1. A `ScrollObserver` watches for the section entering the viewport (10% threshold)
+2. When triggered, `onEnterViewport()` fires once
+3. Child elements animate in with a staggered fade + translate-up effect
+4. The observer disconnects after firing (one-shot)
+
+```html
+<!-- Section animates children when scrolled into view -->
+<dk-section-features-grid headline="Features">
+  <!-- Each card fades in sequentially -->
+  <dk-feature-card title="Fast" description="..."></dk-feature-card>
+  <dk-feature-card title="Secure" description="..."></dk-feature-card>
+  <dk-feature-card title="Simple" description="..."></dk-feature-card>
+</dk-section-features-grid>
+```
+
+The default entrance animation:
+- **Opacity**: 0 to 1
+- **Transform**: translateY(20px) to translateY(0)
+- **Duration**: 0.6s per element
+- **Stagger delay**: 0.05s between elements
+
+## Disabling Animations
+
+### Per-component
+
+Add the `no-animate` attribute to any section:
+
+```html
+<dk-section-hero-centered no-animate headline="No animation">
+</dk-section-hero-centered>
+```
+
+### System-wide
+
+DesignKit respects `prefers-reduced-motion: reduce`. When this media query matches, all animations are skipped and elements jump to their final state instantly.
+
+```css
+/* Users can also force reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  /* DesignKit automatically handles this */
+}
+```
+
+### Programmatic
+
+The motion utilities check `prefers-reduced-motion` before every animation call. If the user has reduced motion enabled, `dkAnimate` and `dkSpring` apply final values directly via inline styles, and `dkStagger` is a no-op.
+
+## Customizing Spring Parameters
+
+Spring animations use these defaults:
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `stiffness` | 300 | Higher = snappier |
+| `damping` | 24 | Higher = less bounce |
+| `mass` | 1 | Higher = more inertia |
+
+To customize, components that use springs expose these as overridable parameters in their animation calls. The values are tuned per-component for the best feel -- buttons are snappy, switches have a slight bounce, dialogs are smooth.
+
+## Performance
+
+- Motion One uses the Web Animations API, running animations off the main thread when possible
+- Only `opacity` and `transform` are animated (compositor-friendly properties)
+- `IntersectionObserver` for scroll-triggered animations avoids scroll event listeners
+- Observers disconnect after firing, so there is no ongoing performance cost
+- The entire motion module adds ~3.5KB gzip to the bundle
