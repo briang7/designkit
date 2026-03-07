@@ -2,6 +2,7 @@ import { html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { DkElement } from '../../core/dk-element.js';
+import { dkAnimate } from '../../core/motion.js';
 import { tooltipStyles } from './dk-tooltip.styles.js';
 
 export type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right';
@@ -20,6 +21,12 @@ export class DkTooltip extends DkElement {
   private show() {
     this.showTimeout = setTimeout(() => {
       this.visible = true;
+      this.updateComplete.then(() => {
+        const tooltipEl = this.shadowRoot?.querySelector('.tooltip') as HTMLElement;
+        if (tooltipEl) {
+          dkAnimate(tooltipEl, { opacity: [0, 1], scale: [0.9, 1] }, { duration: 0.15 });
+        }
+      });
     }, this.delay);
   }
 

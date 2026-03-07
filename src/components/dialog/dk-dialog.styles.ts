@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import { scaleIn, fadeIn, reducedMotion } from '../../core/animations.js';
+import { reducedMotion } from '../../core/animations.js';
 
 export const dialogStyles = css`
   :host {
@@ -14,7 +14,7 @@ export const dialogStyles = css`
     align-items: center;
     justify-content: center;
     background: var(--dk-color-overlay);
-    animation: dk-fade-in 200ms ease;
+    /* animation handled by Motion One */
   }
 
   .panel {
@@ -25,7 +25,7 @@ export const dialogStyles = css`
     width: calc(100% - 32px);
     max-height: calc(100vh - 64px);
     overflow-y: auto;
-    animation: dk-scale-in 200ms ease;
+    /* animation handled by Motion One */
     font-family: var(--dk-font-sans);
     color: var(--dk-color-text);
   }
@@ -80,7 +80,5 @@ export const dialogStyles = css`
     display: none;
   }
 
-  ${scaleIn}
-  ${fadeIn}
   ${reducedMotion}
 `;

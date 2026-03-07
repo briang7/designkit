@@ -3,6 +3,12 @@ import { css } from 'lit';
 export const cardStyles = css`
   :host {
     display: block;
+    transition: transform var(--dk-transition-normal), box-shadow var(--dk-transition-normal);
+  }
+
+  :host(:hover) {
+    transform: translateY(-2px);
+    box-shadow: var(--dk-shadow-lg);
   }
 
   .card {

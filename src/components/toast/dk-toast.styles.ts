@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import { slideInDown, fadeIn, reducedMotion } from '../../core/animations.js';
+import { fadeIn, reducedMotion } from '../../core/animations.js';
 
 const toastStyle = css`
   :host {
@@ -18,7 +18,7 @@ const toastStyle = css`
     font-family: var(--dk-font-sans);
     font-size: var(--dk-text-sm);
     color: var(--dk-color-text);
-    animation: dk-slide-in-down 200ms ease;
+    /* animation handled by Motion One */
     min-width: 300px;
     max-width: 420px;
   }
@@ -86,7 +86,6 @@ const toastStyle = css`
     box-shadow: var(--dk-focus-ring);
   }
 
-  ${slideInDown}
   ${reducedMotion}
 `;
 

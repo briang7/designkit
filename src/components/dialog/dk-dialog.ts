@@ -2,6 +2,7 @@ import { html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { DkElement } from '../../core/dk-element.js';
 import { FocusTrap } from '../../core/focus-trap.js';
+import { dkAnimate, dkSpring } from '../../core/motion.js';
 import { dialogStyles } from './dk-dialog.styles.js';
 
 @customElement('dk-dialog')
@@ -19,7 +20,10 @@ export class DkDialog extends DkElement {
     this.emitEvent('dk-show');
     this.updateComplete.then(() => {
       const panel = this.shadowRoot!.querySelector('.panel') as HTMLElement;
+      const backdrop = this.shadowRoot!.querySelector('.overlay') as HTMLElement;
+      if (backdrop) dkAnimate(backdrop, { opacity: [0, 1] }, { duration: 0.2 });
       if (panel) {
+        dkSpring(panel, { opacity: [0, 1], scale: [0.95, 1], transform: ['translateY(20px)', 'translateY(0)'] });
         this.focusTrap = new FocusTrap(panel);
         this.focusTrap.activate();
       }

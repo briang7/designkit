@@ -4,6 +4,11 @@ import { reducedMotion } from '../../core/animations.js';
 export const badgeStyles = css`
   :host {
     display: inline-block;
+    transition: transform var(--dk-transition-fast);
+  }
+
+  :host(:hover) {
+    transform: scale(1.05);
   }
 
   .badge {

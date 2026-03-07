@@ -23,7 +23,7 @@ export const tooltipStyles = css`
     border-radius: var(--dk-radius-sm);
     white-space: nowrap;
     pointer-events: none;
-    animation: dk-fade-in 150ms ease;
+    /* animation handled by Motion One */
   }
 
   .arrow {

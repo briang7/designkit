@@ -2,6 +2,7 @@ import { html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { DkElement } from '../../core/dk-element.js';
+import { dkSpring } from '../../core/motion.js';
 import { toastStyles } from './dk-toast.styles.js';
 
 export type ToastVariant = 'info' | 'success' | 'danger' | 'warning';
@@ -26,6 +27,10 @@ export class DkToast extends DkElement {
   @property() variant: ToastVariant = 'info';
   @property() message = '';
   @property({ attribute: 'action-label' }) actionLabel = '';
+
+  override firstUpdated() {
+    dkSpring(this, { transform: ['translateX(100%)', 'translateX(0)'], opacity: [0, 1] });
+  }
 
   private handleClose() {
     this.emitEvent('dk-close');

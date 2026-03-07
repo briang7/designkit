@@ -31,7 +31,7 @@ const tabStyle = css`
     color: var(--dk-color-primary);
   }
 
-  .tab.active::after {
+  .tab::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -40,12 +40,12 @@ const tabStyle = css`
     height: 2px;
     background: var(--dk-color-primary);
     border-radius: 1px;
-    animation: dk-tab-indicator 200ms ease;
+    transform: scaleX(0);
+    transition: transform var(--dk-transition-normal);
   }
 
-  @keyframes dk-tab-indicator {
-    from { transform: scaleX(0); }
-    to { transform: scaleX(1); }
+  .tab.active::after {
+    transform: scaleX(1);
   }
 
   .tab.disabled {

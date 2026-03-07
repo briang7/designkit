@@ -64,6 +64,7 @@ export const dataTableStyles = css`
   .sort-icon {
     display: inline-flex;
     flex-shrink: 0;
+    transition: transform var(--dk-transition-fast);
   }
 
   td {
@@ -73,6 +74,10 @@ export const dataTableStyles = css`
 
   tbody tr:last-child td {
     border-bottom: none;
+  }
+
+  tbody tr {
+    transition: background-color var(--dk-transition-fast);
   }
 
   tbody tr:hover {

@@ -3,6 +3,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { DkElement } from '../../core/dk-element.js';
 import { FocusTrap } from '../../core/focus-trap.js';
+import { dkSpring } from '../../core/motion.js';
 import { drawerStyles } from './dk-drawer.styles.js';
 
 export type DrawerPlacement = 'start' | 'end' | 'top' | 'bottom';
@@ -24,6 +25,14 @@ export class DkDrawer extends DkElement {
     this.updateComplete.then(() => {
       const panel = this.shadowRoot!.querySelector('.panel') as HTMLElement;
       if (panel) {
+        const transforms: Record<string, string[]> = {
+          end: ['translateX(100%)', 'translateX(0)'],
+          start: ['translateX(-100%)', 'translateX(0)'],
+          top: ['translateY(-100%)', 'translateY(0)'],
+          bottom: ['translateY(100%)', 'translateY(0)'],
+        };
+        const t = transforms[this.placement] || transforms.end;
+        dkSpring(panel, { transform: t });
         this.focusTrap = new FocusTrap(panel);
         this.focusTrap.activate();
       }

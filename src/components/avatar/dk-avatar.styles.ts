@@ -43,6 +43,7 @@ export const avatarStyles = css`
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
+    opacity: 0;
   }
 
   .initials {
@@ -73,6 +74,20 @@ export const avatarStyles = css`
 
   .status.online {
     background: var(--dk-color-success);
+  }
+
+  .status.online::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    border: 2px solid var(--dk-color-success);
+    animation: dk-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes dk-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0; transform: scale(1.4); }
   }
 
   .status.offline {

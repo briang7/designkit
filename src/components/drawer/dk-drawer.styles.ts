@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import { fadeIn, slideInRight, slideInLeft, slideInUp, slideInDown, reducedMotion } from '../../core/animations.js';
+import { fadeIn, reducedMotion } from '../../core/animations.js';
 
 export const drawerStyles = css`
   :host {
@@ -29,28 +29,28 @@ export const drawerStyles = css`
     top: 0;
     right: 0;
     bottom: 0;
-    animation: dk-slide-in-right 250ms ease;
+    /* slide animation handled by Motion One */
   }
 
   .panel.start {
     top: 0;
     left: 0;
     bottom: 0;
-    animation: dk-slide-in-left 250ms ease;
+    /* slide animation handled by Motion One */
   }
 
   .panel.top {
     top: 0;
     left: 0;
     right: 0;
-    animation: dk-slide-in-down 250ms ease;
+    /* slide animation handled by Motion One */
   }
 
   .panel.bottom {
     bottom: 0;
     left: 0;
     right: 0;
-    animation: dk-slide-in-up 250ms ease;
+    /* slide animation handled by Motion One */
   }
 
   .header {
@@ -107,9 +107,5 @@ export const drawerStyles = css`
   }
 
   ${fadeIn}
-  ${slideInRight}
-  ${slideInLeft}
-  ${slideInUp}
-  ${slideInDown}
   ${reducedMotion}
 `;
