@@ -3,6 +3,7 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { DkElement } from '../../core/dk-element.js';
 import { dataTableStyles } from './dk-data-table.styles.js';
+import '../../signature/skeleton/dk-skeleton.js';
 
 export interface DkColumn {
   key: string;
@@ -23,6 +24,7 @@ export class DkDataTable extends DkElement {
   @property({ type: Boolean }) paginated = false;
   @property({ type: Number, attribute: 'page-size' }) pageSize = 10;
   @property({ type: Boolean, attribute: 'sticky-header' }) stickyHeader = false;
+  @property({ type: Boolean, reflect: true }) loading = false;
 
   @state() private sortKey = '';
   @state() private sortDirection: 'asc' | 'desc' = 'asc';
@@ -85,6 +87,32 @@ export class DkDataTable extends DkElement {
   }
 
   override render() {
+    if (this.loading) {
+      const skeletonRows = Array.from({ length: this.pageSize > 5 ? 5 : this.pageSize });
+      return html`
+        <div class="table-wrapper" part="wrapper">
+          <table class=${classMap({ table: true, 'sticky-header': this.stickyHeader })}>
+            <thead>
+              <tr>
+                ${this.columns.map(col => html`
+                  <th style=${col.width ? `width: ${col.width}` : ''}>${col.label}</th>
+                `)}
+              </tr>
+            </thead>
+            <tbody>
+              ${skeletonRows.map(() => html`
+                <tr>
+                  ${this.columns.map(() => html`
+                    <td><dk-skeleton variant="text"></dk-skeleton></td>
+                  `)}
+                </tr>
+              `)}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
     const rows = this.paginatedData;
 
     return html`

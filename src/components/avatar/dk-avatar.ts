@@ -4,6 +4,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { DkElement } from '../../core/dk-element.js';
 import { dkAnimate } from '../../core/motion.js';
 import { avatarStyles } from './dk-avatar.styles.js';
+import '../../signature/skeleton/dk-skeleton.js';
 
 export type AvatarSize = 'sm' | 'md' | 'lg';
 
@@ -16,6 +17,7 @@ export class DkAvatar extends DkElement {
   @property() initials = '';
   @property({ reflect: true }) size: AvatarSize = 'md';
   @property({ reflect: true }) status: 'online' | 'offline' | 'away' | '' = '';
+  @property({ type: Boolean, reflect: true }) loading = false;
 
   @state() private hasImageError = false;
 
@@ -29,6 +31,11 @@ export class DkAvatar extends DkElement {
   }
 
   override render() {
+    if (this.loading) {
+      const sizeMap: Record<AvatarSize, string> = { sm: '32px', md: '40px', lg: '56px' };
+      return html`<dk-skeleton variant="circle" height="${sizeMap[this.size]}"></dk-skeleton>`;
+    }
+
     const showImage = this.src && !this.hasImageError;
     return html`
       <span part="base" class=${classMap({ avatar: true, [this.size]: true })} role="img" aria-label=${this.alt || this.initials || 'avatar'}>

@@ -3,6 +3,7 @@ import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { DkElement } from '../../core/dk-element.js';
 import { inputStyles } from './dk-input.styles.js';
+import '../../signature/skeleton/dk-skeleton.js';
 
 export type InputSize = 'sm' | 'md' | 'lg';
 
@@ -20,6 +21,7 @@ export class DkInput extends DkElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
   @property({ type: Boolean, reflect: true }) required = false;
   @property({ type: Boolean }) clearable = false;
+  @property({ type: Boolean, reflect: true }) loading = false;
 
   @query('input') private inputEl!: HTMLInputElement;
 
@@ -43,6 +45,15 @@ export class DkInput extends DkElement {
   public blur() { this.inputEl?.blur(); }
 
   override render() {
+    if (this.loading) {
+      return html`
+        <div part="wrapper" class="wrapper ${this.size}">
+          ${this.label ? html`<dk-skeleton variant="text" width="30%" style="margin-bottom: 4px"></dk-skeleton>` : nothing}
+          <dk-skeleton variant="rect" height="${this.size === 'sm' ? '32px' : this.size === 'lg' ? '48px' : '40px'}"></dk-skeleton>
+        </div>
+      `;
+    }
+
     const hasError = !!this.errorText;
     const hasValue = !!this.value;
     return html`
