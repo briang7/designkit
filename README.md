@@ -45,6 +45,8 @@ import '@briang7/designkit/input';
 
 ## Components
 
+### Primitives
+
 | Component | Tag | Description |
 |-----------|-----|-------------|
 | Button | `<dk-button>` | Primary actions and links |
@@ -61,6 +63,80 @@ import '@briang7/designkit/input';
 | Drawer | `<dk-drawer>` | Slide-out panel from any edge |
 | Toast | `<dk-toast>` | Notification messages |
 | Data Table | `<dk-data-table>` | Sortable, paginated data grid |
+
+### Signature Components
+
+| Component | Tag | Description |
+|-----------|-----|-------------|
+| Skeleton | `<dk-skeleton>` | Loading placeholder with shimmer animation |
+| Command | `<dk-command>` | Command palette with fuzzy search (Cmd+K) |
+| Form | `<dk-form>` | Declarative form with validation and layout |
+
+## Sections
+
+36 pre-built page sections across 14 types for composing full landing pages:
+
+| Type | Variants | Import |
+|------|----------|--------|
+| Navbar | Simple, With Search, Mega | `./sections/navbar` |
+| Hero | Centered, Split, Background | `./sections/hero` |
+| Footer | Simple, Columns | `./sections/footer` |
+| Features | Grid, Alternating, Centered | `./sections/features` |
+| Testimonials | Grid, Carousel | `./sections/testimonials` |
+| CTA | Centered, Split | `./sections/cta` |
+| Stats | Bar, Cards | `./sections/stats` |
+| Pricing | Tiers, Comparison, Simple | `./sections/pricing` |
+| FAQ | Accordion, Two Column | `./sections/faq` |
+| Newsletter | Inline, Card | `./sections/newsletter` |
+| Gallery | Grid, Carousel | `./sections/gallery` |
+| Sidebar | Nav, Brand | `./sections/sidebar` |
+| Team | Grid, List | `./sections/team` |
+| Contact | Split, Centered | `./sections/contact` |
+
+Import individual section types or all at once:
+
+```js
+// Individual
+import '@briang7/designkit/sections/hero';
+import '@briang7/designkit/sections/features';
+
+// All sections
+import '@briang7/designkit/sections';
+```
+
+### Build a Landing Page
+
+```html
+<dk-section-navbar-simple brand="MyApp" sticky>
+  <a slot="links" href="#features">Features</a>
+  <a slot="links" href="#pricing">Pricing</a>
+  <dk-button slot="cta" variant="primary">Get Started</dk-button>
+</dk-section-navbar-simple>
+
+<dk-section-hero-centered
+  headline="Build faster"
+  subheadline="Ship in days, not months."
+>
+  <dk-button slot="cta-primary" variant="primary" size="lg">Start Free</dk-button>
+</dk-section-hero-centered>
+
+<dk-section-features-grid headline="Everything you need">
+  <dk-feature-card icon="lightning" title="Fast" description="Blazing performance"></dk-feature-card>
+  <dk-feature-card icon="shield" title="Secure" description="Built-in security"></dk-feature-card>
+  <dk-feature-card icon="puzzle" title="Modular" description="Use what you need"></dk-feature-card>
+</dk-section-features-grid>
+
+<dk-section-footer-simple brand="MyApp"></dk-section-footer-simple>
+```
+
+## Animations
+
+DesignKit includes [Motion One](https://motion.dev/) for smooth, hardware-accelerated animations:
+
+- **Micro-interactions**: Button press scale, switch spring toggle, dialog fade, toast slide
+- **Section entrances**: Staggered fade-in when sections scroll into view via IntersectionObserver
+- **Reduced motion**: Respects `prefers-reduced-motion: reduce` automatically
+- **Per-section control**: Add `no-animate` attribute to disable entrance animations
 
 ## Theming
 
