@@ -16,7 +16,7 @@ export const inputStyles = css`
     font-weight: var(--dk-font-medium);
     color: var(--dk-color-text-muted);
     pointer-events: none;
-    transition: transform var(--dk-transition-normal), font-size var(--dk-transition-normal), color var(--dk-transition-normal);
+    transition: transform var(--dk-transition-normal), font-size var(--dk-transition-normal), color var(--dk-transition-normal), left var(--dk-transition-normal);
     transform-origin: left center;
     z-index: 1;
   }
@@ -41,10 +41,15 @@ export const inputStyles = css`
     padding-top: var(--dk-space-2);
   }
 
+  .wrapper.has-prefix .label {
+    left: calc(var(--dk-space-3) + var(--dk-input-prefix-offset, 1.5em) + var(--dk-space-2));
+  }
+
   .wrapper:focus-within .label,
   .wrapper.has-value .label {
     transform: translateY(-140%) scale(0.85);
     color: var(--dk-color-input-border-focus);
+    left: var(--dk-space-3);
   }
 
   .wrapper:hover:not(.disabled) {

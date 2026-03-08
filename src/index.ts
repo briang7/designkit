@@ -27,6 +27,8 @@ export type { TooltipPlacement } from './components/tooltip/index.js';
 
 export { DkTabs, DkTab, DkTabPanel } from './components/tabs/index.js';
 
+export { DkAccordion, DkAccordionItem } from './components/accordion/index.js';
+
 export { DkDialog } from './components/dialog/index.js';
 
 export { DkDrawer } from './components/drawer/index.js';
@@ -37,6 +39,22 @@ export type { ToastVariant, ToastPlacement, ToastOptions } from './components/to
 
 export { DkDataTable } from './components/data-table/index.js';
 export type { DkColumn } from './components/data-table/index.js';
+
+export { DkAlert } from './components/alert/index.js';
+
+export { DkBreadcrumbs, DkBreadcrumb } from './components/breadcrumbs/index.js';
+
+export { DkPagination } from './components/pagination/index.js';
+
+export { DkDropdown, DkDropdownItem, DkDropdownDivider } from './components/dropdown/index.js';
+
+export { DkProgress } from './components/progress/index.js';
+
+export { DkRating } from './components/rating/index.js';
+
+export { DkDivider } from './components/divider/index.js';
+
+export { DkSearchInput } from './components/search-input/index.js';
 
 // Signature components
 export { DkSkeleton } from './signature/skeleton/index.js';

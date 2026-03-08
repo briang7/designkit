@@ -23,7 +23,7 @@ export const buttonStyles = css`
     font-weight: var(--dk-font-medium);
     line-height: var(--dk-leading-tight);
     cursor: pointer;
-    transition: all var(--dk-transition-fast);
+    transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1), color 250ms cubic-bezier(0.4, 0, 0.2, 1), border-color 200ms ease, box-shadow 200ms ease, transform 150ms ease;
     position: relative;
     overflow: hidden;
     white-space: nowrap;
@@ -63,6 +63,7 @@ export const buttonStyles = css`
 
   button.primary:hover {
     background: var(--dk-color-primary-hover);
+    color: var(--dk-color-primary-hover-text, var(--dk-color-primary-text));
   }
 
   button.primary:active {
@@ -93,6 +94,7 @@ export const buttonStyles = css`
 
   button.ghost:hover {
     background: var(--dk-color-surface);
+    color: var(--dk-color-ghost-hover-text, var(--dk-color-text));
   }
 
   button.ghost:active {

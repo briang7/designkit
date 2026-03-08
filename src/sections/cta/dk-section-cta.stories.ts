@@ -2,6 +2,9 @@ import type { Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
 import './dk-section-cta-centered.js';
 import './dk-section-cta-split.js';
+import './dk-section-cta-dark.js';
+import './dk-section-cta-brand.js';
+import './dk-section-cta-with-image.js';
 import '../../components/button/dk-button.js';
 
 const meta: Meta = {
@@ -58,4 +61,47 @@ export const Split: Story = {
       />
     </dk-section-cta-split>
   `
+};
+
+export const Dark: Story = {
+  render: () => html`
+    <dk-section-cta-dark
+      headline="Build Faster with DesignKit"
+      description="Production-ready Lit components with built-in accessibility, theming, and animations. Start shipping polished interfaces in minutes, not weeks."
+    >
+      <div slot="cta" style="display: flex; gap: 12px; justify-content: center;">
+        <dk-button variant="primary" size="lg">Get Started Free</dk-button>
+        <dk-button variant="ghost" size="lg">View Documentation</dk-button>
+      </div>
+    </dk-section-cta-dark>
+  `,
+};
+
+export const Brand: Story = {
+  render: () => html`
+    <dk-section-cta-brand
+      headline="Join 10,000+ Developers"
+      description="DesignKit powers interfaces at startups and enterprises alike. See why teams choose framework-agnostic web components."
+    >
+      <div slot="cta" style="display: flex; gap: 12px; justify-content: center;">
+        <dk-button variant="primary" size="lg">Start Building</dk-button>
+        <dk-button variant="ghost" size="lg">See Examples</dk-button>
+      </div>
+    </dk-section-cta-brand>
+  `,
+};
+
+export const WithImage: Story = {
+  render: () => html`
+    <dk-section-cta-with-image
+      headline="Your Design System, Supercharged"
+      description="Drop DesignKit components into any framework \u2014 React, Vue, Svelte, Angular, or vanilla HTML. Zero lock-in, maximum flexibility."
+      image="https://picsum.photos/seed/cta-bg/1200/600"
+    >
+      <div slot="cta" style="display: flex; gap: 12px; justify-content: center;">
+        <dk-button variant="primary" size="lg">Try It Now</dk-button>
+        <dk-button variant="ghost" size="lg">Watch Demo</dk-button>
+      </div>
+    </dk-section-cta-with-image>
+  `,
 };

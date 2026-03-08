@@ -142,6 +142,42 @@
   --dk-navbar-height: 64px;
 }
 
+/* FOUC prevention — hide unregistered section elements until they upgrade */
+dk-section-navbar-simple:not(:defined),
+dk-section-navbar-mega:not(:defined),
+dk-section-navbar-with-search:not(:defined),
+dk-section-hero-background:not(:defined),
+dk-section-hero-centered:not(:defined),
+dk-section-hero-split:not(:defined),
+dk-section-features-grid:not(:defined),
+dk-section-features-centered:not(:defined),
+dk-section-features-alternating:not(:defined),
+dk-section-stats-bar:not(:defined),
+dk-section-stats-cards:not(:defined),
+dk-section-testimonials-grid:not(:defined),
+dk-section-testimonials-carousel:not(:defined),
+dk-section-pricing-tiers:not(:defined),
+dk-section-pricing-comparison:not(:defined),
+dk-section-pricing-simple:not(:defined),
+dk-section-faq-accordion:not(:defined),
+dk-section-faq-two-column:not(:defined),
+dk-section-cta-centered:not(:defined),
+dk-section-cta-split:not(:defined),
+dk-section-newsletter-inline:not(:defined),
+dk-section-newsletter-card:not(:defined),
+dk-section-footer-columns:not(:defined),
+dk-section-footer-simple:not(:defined),
+dk-section-gallery-grid:not(:defined),
+dk-section-gallery-carousel:not(:defined),
+dk-section-contact-split:not(:defined),
+dk-section-contact-centered:not(:defined),
+dk-section-team-grid:not(:defined),
+dk-section-team-list:not(:defined),
+dk-section-sidebar-brand:not(:defined),
+dk-section-sidebar-nav:not(:defined) {
+  opacity: 0;
+}
+
 /* Base link reset — removes default blue/underline from all links inside DesignKit components */
 a {
   color: inherit;

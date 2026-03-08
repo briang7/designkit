@@ -8,6 +8,7 @@ export class DkFooterColumn extends LitElement {
   static override styles = css`
     :host {
       display: block;
+      background: transparent;
     }
 
     .label {
@@ -46,6 +47,7 @@ export class DkFooterLink extends LitElement {
   static override styles = css`
     :host {
       display: block;
+      background: transparent;
     }
 
     a {

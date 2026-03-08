@@ -69,6 +69,7 @@ describe('dk-section-testimonials-carousel', () => {
     const nextBtn = el.shadowRoot!.querySelector('[part="arrow-next"]');
     expect(nextBtn).to.exist;
     const dots = el.shadowRoot!.querySelectorAll('.dot');
-    expect(dots.length).to.equal(2);
+    // At desktop width (>=1024px), visible count is 3, so 2 slides = 1 dot (maxIndex=0)
+    expect(dots.length).to.equal(1);
   });
 });

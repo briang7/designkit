@@ -3,6 +3,10 @@ import { html } from 'lit';
 import './dk-section-hero-centered.js';
 import './dk-section-hero-split.js';
 import './dk-section-hero-background.js';
+import './dk-section-hero-gradient.js';
+import './dk-section-hero-minimal.js';
+import './dk-section-hero-image-tiles.js';
+import './dk-section-hero-video.js';
 import '../../components/button/dk-button.js';
 
 const meta: Meta = {
@@ -65,5 +69,60 @@ export const Background: Story = {
       <dk-button slot="cta-primary" variant="primary" size="lg">Join Waitlist</dk-button>
       <dk-button slot="cta-secondary" variant="ghost" size="lg">Learn More</dk-button>
     </dk-section-hero-background>
+  `,
+};
+
+export const Gradient: Story = {
+  render: () => html`
+    <dk-section-hero-gradient
+      headline="Unleash Your Creativity"
+      subheadline="A vibrant, animated gradient hero that captures attention instantly. Perfect for bold product launches."
+      badge="Coming Soon"
+    >
+      <dk-button slot="cta-primary" variant="primary" size="lg">Get Early Access</dk-button>
+      <dk-button slot="cta-secondary" variant="ghost" size="lg">See Features</dk-button>
+    </dk-section-hero-gradient>
+  `,
+};
+
+export const Minimal: Story = {
+  render: () => html`
+    <dk-section-hero-minimal
+      headline="Less is More"
+      subheadline="A clean, typography-focused hero with elegant serif type and a subtle scroll indicator."
+    >
+      <dk-button slot="cta-primary" variant="primary" size="lg">Explore</dk-button>
+    </dk-section-hero-minimal>
+  `,
+};
+
+export const ImageTiles: Story = {
+  render: () => html`
+    <dk-section-hero-image-tiles
+      headline="Curate Your Collection"
+      subheadline="Showcase multiple visuals in an asymmetric grid layout alongside compelling copy."
+      badge="Portfolio"
+    >
+      <dk-button slot="cta-primary" variant="primary" size="lg">Browse Gallery</dk-button>
+      <dk-button slot="cta-secondary" variant="secondary" size="lg">Upload Yours</dk-button>
+      <img slot="image-1" src="https://picsum.photos/seed/tile1/400/500" alt="Tile 1" />
+      <img slot="image-2" src="https://picsum.photos/seed/tile2/400/250" alt="Tile 2" />
+      <img slot="image-3" src="https://picsum.photos/seed/tile3/400/500" alt="Tile 3" />
+      <img slot="image-4" src="https://picsum.photos/seed/tile4/400/250" alt="Tile 4" />
+    </dk-section-hero-image-tiles>
+  `,
+};
+
+export const Video: Story = {
+  render: () => html`
+    <dk-section-hero-video
+      headline="Experience in Motion"
+      subheadline="A full-bleed background video hero with a dark overlay for maximum readability."
+      badge="Live Demo"
+      video-src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4"
+    >
+      <dk-button slot="cta-primary" variant="primary" size="lg">Play Reel</dk-button>
+      <dk-button slot="cta-secondary" variant="ghost" size="lg">Read Case Study</dk-button>
+    </dk-section-hero-video>
   `,
 };

@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
 import './dk-section-faq-accordion.js';
 import './dk-section-faq-two-column.js';
+import './dk-section-faq-centered.js';
+import './dk-section-faq-dark.js';
 import './dk-faq-item.js';
 
 const meta: Meta = {
@@ -66,5 +68,55 @@ export const TwoColumn: Story = {
         { question: 'Is there a Figma design kit?', answer: 'Yes, Pro and Enterprise plans include a complete Figma library that stays in sync with the code components. Auto-layout and variants are fully supported.' },
       ]}
     ></dk-section-faq-two-column>
+  `,
+};
+
+export const Centered: Story = {
+  render: () => html`
+    <dk-section-faq-centered
+      headline="Questions & Answers"
+      subheadline="Find answers to the most common questions about getting started."
+    >
+      <dk-faq-item question="How do I get started with DesignKit?" open>
+        Install the package via npm, import the components you need, and drop them into your HTML. No build step required for basic usage.
+      </dk-faq-item>
+      <dk-faq-item question="Does DesignKit work with TypeScript?">
+        Yes. Every component ships with full TypeScript declarations. You get autocomplete, type checking, and inline documentation in your IDE.
+      </dk-faq-item>
+      <dk-faq-item question="Can I use individual components without the full library?">
+        Absolutely. Each component is published as a separate entry point. Import only what you need and your bundler will tree-shake the rest.
+      </dk-faq-item>
+      <dk-faq-item question="What browsers are supported?">
+        All modern browsers including Chrome, Firefox, Safari, and Edge. We support the last two major versions of each browser.
+      </dk-faq-item>
+      <dk-faq-item question="Is there a migration guide from v1 to v2?">
+        Yes, our documentation includes a comprehensive migration guide with codemods to automate most of the breaking changes.
+      </dk-faq-item>
+    </dk-section-faq-centered>
+  `,
+};
+
+export const Dark: Story = {
+  render: () => html`
+    <dk-section-faq-dark
+      headline="Frequently Asked Questions"
+      subheadline="Everything you need to know about our platform and pricing."
+    >
+      <dk-faq-item question="What payment methods do you accept?" open>
+        We accept all major credit cards (Visa, Mastercard, Amex), PayPal, and bank transfers for Enterprise plans. All payments are processed securely through Stripe.
+      </dk-faq-item>
+      <dk-faq-item question="Can I cancel my subscription at any time?">
+        Yes. You can cancel anytime from your account settings. Your access continues until the end of the current billing period with no additional charges.
+      </dk-faq-item>
+      <dk-faq-item question="Do you offer refunds?">
+        We offer a 14-day money-back guarantee on all paid plans. If you're not satisfied, contact support for a full refund.
+      </dk-faq-item>
+      <dk-faq-item question="Is there a discount for open source projects?">
+        Yes! Open source maintainers get free access to the Pro plan. Apply through our OSS program page with a link to your repository.
+      </dk-faq-item>
+      <dk-faq-item question="How do I upgrade my plan?">
+        Navigate to Settings > Billing in your dashboard. Select the new plan and the prorated difference will be charged immediately.
+      </dk-faq-item>
+    </dk-section-faq-dark>
   `,
 };

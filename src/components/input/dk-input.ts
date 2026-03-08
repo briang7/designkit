@@ -1,5 +1,5 @@
 import { html, nothing } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { DkElement } from '../../core/dk-element.js';
 import { inputStyles } from './dk-input.styles.js';
@@ -24,6 +24,31 @@ export class DkInput extends DkElement {
   @property({ type: Boolean, reflect: true }) loading = false;
 
   @query('input') private inputEl!: HTMLInputElement;
+  @state() private _hasPrefix = false;
+
+  private _handlePrefixSlotChange(e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    const nodes = slot.assignedNodes({ flatten: true });
+    this._hasPrefix = nodes.length > 0;
+    if (this._hasPrefix) {
+      requestAnimationFrame(() => {
+        const slotEl = slot.parentElement ?? slot;
+        let totalWidth = 0;
+        for (const node of nodes) {
+          if (node instanceof HTMLElement) {
+            totalWidth += node.offsetWidth;
+          } else if (node.textContent?.trim()) {
+            totalWidth += slotEl.offsetWidth || 16;
+          }
+        }
+        if (totalWidth > 0) {
+          this.style.setProperty('--dk-input-prefix-offset', `${totalWidth}px`);
+        }
+      });
+    } else {
+      this.style.removeProperty('--dk-input-prefix-offset');
+    }
+  }
 
   private handleInput(e: Event) {
     this.value = (e.target as HTMLInputElement).value;
@@ -57,9 +82,9 @@ export class DkInput extends DkElement {
     const hasError = !!this.errorText;
     const hasValue = !!this.value;
     return html`
-      <div part="wrapper" class=${classMap({ wrapper: true, [this.size]: true, error: hasError, disabled: this.disabled, 'has-value': hasValue, 'has-label': !!this.label })}>
+      <div part="wrapper" class=${classMap({ wrapper: true, [this.size]: true, error: hasError, disabled: this.disabled, 'has-value': hasValue, 'has-label': !!this.label, 'has-prefix': this._hasPrefix })}>
         ${this.label ? html`<label part="label" class="label">${this.label}${this.required ? html`<span class="required"> *</span>` : nothing}</label>` : nothing}
-        <slot name="prefix"></slot>
+        <slot name="prefix" @slotchange=${this._handlePrefixSlotChange}></slot>
         <input
           part="input"
           type=${this.type}

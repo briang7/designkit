@@ -45,6 +45,16 @@ export const heroBaseStyles = css`
     margin: 0 0 var(--dk-space-8, 2rem);
   }
 
+  :host([bg="brand"]) h1,
+  :host([bg="dark"]) h1 {
+    color: #ffffff;
+  }
+
+  :host([bg="brand"]) .subheadline,
+  :host([bg="dark"]) .subheadline {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
   .cta-group {
     display: flex;
     gap: var(--dk-space-3, 0.75rem);

@@ -38,6 +38,16 @@ export const teamBaseStyles = css`
     margin-inline: auto;
   }
 
+  :host([bg="brand"]) h2,
+  :host([bg="dark"]) h2 {
+    color: #ffffff;
+  }
+
+  :host([bg="brand"]) .subheadline,
+  :host([bg="dark"]) .subheadline {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
   .animate-target {
     opacity: 0;
     animation: dk-reveal 0.01s 1s forwards;

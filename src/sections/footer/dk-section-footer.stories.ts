@@ -2,6 +2,9 @@ import type { Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
 import './dk-section-footer-columns.js';
 import './dk-section-footer-simple.js';
+import './dk-section-footer-centered.js';
+import './dk-section-footer-dark.js';
+import './dk-section-footer-with-newsletter.js';
 import './dk-footer-helpers.js';
 
 const meta: Meta = {
@@ -81,5 +84,104 @@ export const Simple: Story = {
         <a href="#">Twitter</a>
       </nav>
     </dk-section-footer-simple>
+  `,
+};
+
+export const Centered: Story = {
+  render: () => html`
+    <dk-section-footer-centered
+      brand="DesignKit"
+      copyright="\u00A9 2026 DesignKit. All rights reserved."
+    >
+      <span slot="logo" style="font-size: 1.5rem; font-weight: 700;">DK</span>
+      <div slot="links">
+        <dk-footer-link href="#">Components</dk-footer-link>
+        <dk-footer-link href="#">Documentation</dk-footer-link>
+        <dk-footer-link href="#">Blog</dk-footer-link>
+        <dk-footer-link href="#">Pricing</dk-footer-link>
+        <dk-footer-link href="#">Contact</dk-footer-link>
+      </div>
+      <div slot="social" style="display: flex; gap: 8px;">
+        <dk-footer-social platform="github" href="#"></dk-footer-social>
+        <dk-footer-social platform="twitter" href="#"></dk-footer-social>
+        <dk-footer-social platform="linkedin" href="#"></dk-footer-social>
+        <dk-footer-social platform="youtube" href="#"></dk-footer-social>
+      </div>
+    </dk-section-footer-centered>
+  `,
+};
+
+export const Dark: Story = {
+  render: () => html`
+    <dk-section-footer-dark
+      brand="DesignKit"
+      description="Open-source UI components built with Lit for blazing-fast, framework-agnostic web apps."
+      copyright="\u00A9 2026 DesignKit. All rights reserved."
+    >
+      <span slot="logo" style="font-size: 1.5rem; font-weight: 700; color: #f9fafb;">DK</span>
+      <div slot="columns">
+        <dk-footer-column label="Product">
+          <dk-footer-link href="#">Components</dk-footer-link>
+          <dk-footer-link href="#">Templates</dk-footer-link>
+          <dk-footer-link href="#">Figma Kit</dk-footer-link>
+          <dk-footer-link href="#">Changelog</dk-footer-link>
+        </dk-footer-column>
+        <dk-footer-column label="Developers">
+          <dk-footer-link href="#">Documentation</dk-footer-link>
+          <dk-footer-link href="#">API Reference</dk-footer-link>
+          <dk-footer-link href="#">Storybook</dk-footer-link>
+          <dk-footer-link href="#">npm Package</dk-footer-link>
+        </dk-footer-column>
+        <dk-footer-column label="Company">
+          <dk-footer-link href="#">About Us</dk-footer-link>
+          <dk-footer-link href="#">Careers</dk-footer-link>
+          <dk-footer-link href="#">Blog</dk-footer-link>
+          <dk-footer-link href="#">Contact</dk-footer-link>
+        </dk-footer-column>
+      </div>
+      <div slot="social" style="display: flex; gap: 8px;">
+        <dk-footer-social platform="github" href="#"></dk-footer-social>
+        <dk-footer-social platform="twitter" href="#"></dk-footer-social>
+        <dk-footer-social platform="linkedin" href="#"></dk-footer-social>
+      </div>
+    </dk-section-footer-dark>
+  `,
+};
+
+export const WithNewsletter: Story = {
+  render: () => html`
+    <dk-section-footer-with-newsletter
+      brand="DesignKit"
+      description="Subscribe to get the latest component updates, design tips, and release notes delivered to your inbox."
+      copyright="\u00A9 2026 DesignKit. All rights reserved."
+      placeholder="you@example.com"
+      button-text="Subscribe"
+    >
+      <span slot="logo" style="font-size: 1.5rem; font-weight: 700;">DK</span>
+      <div slot="columns">
+        <dk-footer-column label="Product">
+          <dk-footer-link href="#">Components</dk-footer-link>
+          <dk-footer-link href="#">Templates</dk-footer-link>
+          <dk-footer-link href="#">Pricing</dk-footer-link>
+          <dk-footer-link href="#">Changelog</dk-footer-link>
+        </dk-footer-column>
+        <dk-footer-column label="Resources">
+          <dk-footer-link href="#">Documentation</dk-footer-link>
+          <dk-footer-link href="#">Tutorials</dk-footer-link>
+          <dk-footer-link href="#">Community</dk-footer-link>
+          <dk-footer-link href="#">Support</dk-footer-link>
+        </dk-footer-column>
+        <dk-footer-column label="Legal">
+          <dk-footer-link href="#">Privacy Policy</dk-footer-link>
+          <dk-footer-link href="#">Terms of Service</dk-footer-link>
+          <dk-footer-link href="#">Cookie Policy</dk-footer-link>
+        </dk-footer-column>
+      </div>
+      <div slot="social" style="display: flex; gap: 8px;">
+        <dk-footer-social platform="github" href="#"></dk-footer-social>
+        <dk-footer-social platform="twitter" href="#"></dk-footer-social>
+        <dk-footer-social platform="youtube" href="#"></dk-footer-social>
+      </div>
+    </dk-section-footer-with-newsletter>
   `,
 };

@@ -3,6 +3,8 @@ import { html } from 'lit';
 import './dk-section-pricing-tiers.js';
 import './dk-section-pricing-comparison.js';
 import './dk-section-pricing-simple.js';
+import './dk-section-pricing-dark.js';
+import './dk-section-pricing-with-toggle.js';
 import './dk-pricing-tier.js';
 import '../../components/button/dk-button.js';
 
@@ -117,5 +119,92 @@ export const Simple: Story = {
     >
       <dk-button slot="cta" variant="primary" size="lg">Get Full Access</dk-button>
     </dk-section-pricing-simple>
+  `,
+};
+
+export const Dark: Story = {
+  render: () => html`
+    <dk-section-pricing-dark headline="Pricing Plans" subheadline="Flexible plans for teams of every size.">
+      <dk-pricing-tier
+        name="Hobby"
+        price="$0"
+        period="/month"
+        annual-price="$0"
+        annual-period="/year"
+        description="For personal projects and learning."
+        .features=${['3 projects', '5 components', 'Community forum', 'Basic docs']}
+      >
+        <dk-button slot="cta" variant="secondary">Get Started</dk-button>
+      </dk-pricing-tier>
+      <dk-pricing-tier
+        name="Team"
+        price="$39"
+        period="/month"
+        annual-price="$390"
+        annual-period="/year"
+        description="For professional teams shipping products."
+        featured
+        .features=${['Unlimited projects', 'All components', 'Slack support', 'Advanced docs', 'Theme editor', 'Up to 15 members']}
+      >
+        <dk-button slot="cta" variant="primary">Start Free Trial</dk-button>
+      </dk-pricing-tier>
+      <dk-pricing-tier
+        name="Scale"
+        price="$129"
+        period="/month"
+        annual-price="$1,290"
+        annual-period="/year"
+        description="For enterprises with custom needs."
+        .features=${['Everything in Team', 'Unlimited members', 'SSO & audit logs', '99.9% SLA', 'Dedicated CSM', 'Custom contracts']}
+      >
+        <dk-button slot="cta" variant="secondary">Contact Sales</dk-button>
+      </dk-pricing-tier>
+    </dk-section-pricing-dark>
+  `,
+};
+
+export const WithToggle: Story = {
+  render: () => html`
+    <dk-section-pricing-with-toggle
+      headline="Choose Your Plan"
+      subheadline="Save 20% with annual billing."
+      monthly-label="Monthly"
+      annual-label="Annual"
+    >
+      <dk-pricing-tier
+        name="Starter"
+        price="$12"
+        period="/month"
+        annual-price="$115"
+        annual-period="/year"
+        description="Everything you need to get started."
+        .features=${['10 projects', '20 components', 'Email support', 'Standard analytics', '3 team members']}
+      >
+        <dk-button slot="cta" variant="secondary">Choose Starter</dk-button>
+      </dk-pricing-tier>
+      <dk-pricing-tier
+        name="Growth"
+        price="$49"
+        period="/month"
+        annual-price="$470"
+        annual-period="/year"
+        description="For teams that need more power and flexibility."
+        featured
+        .features=${['Unlimited projects', 'All components', 'Priority support', 'Advanced analytics', '25 team members', 'Custom themes', 'Figma library']}
+      >
+        <dk-button slot="cta" variant="primary">Choose Growth</dk-button>
+      </dk-pricing-tier>
+      <dk-pricing-tier
+        name="Business"
+        price="$149"
+        period="/month"
+        annual-price="$1,430"
+        annual-period="/year"
+        description="Advanced features for scaling organizations."
+        .features=${['Everything in Growth', 'Unlimited members', 'SSO & SAML', 'SLA guarantee', 'Dedicated support', 'Custom integrations', 'On-premise deployment']}
+      >
+        <dk-button slot="cta" variant="secondary">Choose Business</dk-button>
+      </dk-pricing-tier>
+    </dk-section-pricing-with-toggle>
   `,
 };

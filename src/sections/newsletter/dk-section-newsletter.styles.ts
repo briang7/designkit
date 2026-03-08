@@ -31,6 +31,16 @@ export const newsletterBaseStyles = css`
     margin: 0;
   }
 
+  :host([bg="brand"]) h2,
+  :host([bg="dark"]) h2 {
+    color: #ffffff;
+  }
+
+  :host([bg="brand"]) .description,
+  :host([bg="dark"]) .description {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
   .form {
     display: flex;
     gap: var(--dk-space-3, 0.75rem);

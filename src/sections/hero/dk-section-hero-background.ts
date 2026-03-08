@@ -2,6 +2,7 @@ import { html, css, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { DkSectionElement } from '../../core/dk-section-element.js';
 import { heroBaseStyles } from './dk-section-hero.styles.js';
+import { applyContrastTokens } from '../../core/contrast.js';
 
 const bgStyles = css`
   :host {
@@ -12,6 +13,7 @@ const bgStyles = css`
     justify-content: center;
     padding: 0;
     overflow: hidden;
+
   }
 
   section {
@@ -79,6 +81,10 @@ export class DkSectionHeroBackground extends DkSectionElement {
   @property() subheadline = '';
   @property() badge = '';
   @property() image = '';
+
+  override async firstUpdated() {
+    await applyContrastTokens(this);
+  }
 
   protected override onEnterViewport() {
     const els = [

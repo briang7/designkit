@@ -12,7 +12,7 @@ const styles = css`
     overflow: hidden;
     border-radius: var(--dk-radius-lg, 0.75rem);
     cursor: pointer;
-    aspect-ratio: 4/3;
+    aspect-ratio: var(--dk-gallery-item-ratio, 4/3);
   }
 
   .item img {

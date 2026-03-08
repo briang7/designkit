@@ -25,7 +25,7 @@ export const ctaBaseStyles = css`
 
   :host([bg="brand"]) .description,
   :host([bg="dark"]) .description {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.9);
   }
 
   .container {
