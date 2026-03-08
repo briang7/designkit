@@ -62,12 +62,6 @@ const gradientStyles = css`
     max-width: 640px;
   }
 
-  .badge {
-    color: var(--dk-hero-gradient-badge-color, #ffffff);
-    background: var(--dk-hero-gradient-badge-bg, rgba(255, 255, 255, 0.2));
-    border-color: var(--dk-hero-gradient-badge-border, rgba(255, 255, 255, 0.3));
-  }
-
   .cta-group {
     justify-content: center;
   }
@@ -79,7 +73,6 @@ export class DkSectionHeroGradient extends DkSectionElement {
 
   @property() headline = '';
   @property() subheadline = '';
-  @property() badge = '';
 
   override async firstUpdated() {
     await applyContrastTokens(this);
@@ -87,7 +80,6 @@ export class DkSectionHeroGradient extends DkSectionElement {
 
   protected override onEnterViewport() {
     const els = [
-      this.shadowRoot?.querySelector('.badge'),
       this.shadowRoot?.querySelector('h1'),
       this.shadowRoot?.querySelector('.subheadline'),
       this.shadowRoot?.querySelector('.cta-group'),
@@ -100,9 +92,6 @@ export class DkSectionHeroGradient extends DkSectionElement {
       <section part="section">
         <div class="gradient-bg" part="gradient"></div>
         <div class="container">
-          ${this.badge
-            ? html`<span class="badge animate-target" part="badge">${this.badge}</span>`
-            : nothing}
           <h1 class="animate-target" part="headline">${this.headline}</h1>
           ${this.subheadline
             ? html`<p class="subheadline animate-target" part="subheadline">${this.subheadline}</p>`

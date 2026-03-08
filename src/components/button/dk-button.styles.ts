@@ -62,8 +62,10 @@ export const buttonStyles = css`
   }
 
   button.primary:hover {
-    background: var(--dk-color-primary-hover);
+    background: var(--dk-color-primary-hover, color-mix(in srgb, var(--dk-color-primary) 85%, black));
     color: var(--dk-color-primary-hover-text, var(--dk-color-primary-text));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--dk-color-primary) 30%, transparent);
   }
 
   button.primary:active {
@@ -80,6 +82,8 @@ export const buttonStyles = css`
   button.secondary:hover {
     background: var(--dk-color-surface);
     border-color: var(--dk-color-border-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   }
 
   button.secondary:active {

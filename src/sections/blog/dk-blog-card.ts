@@ -17,13 +17,14 @@ const styles = css`
     border: 1px solid var(--dk-color-border, #e5e7eb);
     border-radius: var(--dk-radius-xl, 1rem);
     overflow: hidden;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-sizing: border-box;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   }
 
   .card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
   }
 
   a.card {

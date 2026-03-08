@@ -14,12 +14,13 @@ const styles = css`
     background: var(--dk-color-surface, #ffffff);
     border: none;
     overflow: hidden;
-    transition: box-shadow 0.25s ease, transform 0.25s ease;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   }
 
   .card:hover {
-    box-shadow: var(--dk-shadow-lg, 0 10px 25px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1));
-    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
   }
 
   .image-wrapper {

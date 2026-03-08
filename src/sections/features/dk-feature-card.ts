@@ -25,8 +25,20 @@ const styles = css`
   .card {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: var(--dk-feature-card-align, flex-start);
     gap: var(--dk-space-3, 0.75rem);
+    padding: var(--dk-feature-card-padding, var(--dk-space-6, 1.5rem));
+    background: var(--dk-feature-card-bg, var(--dk-color-surface, #ffffff));
+    border: var(--dk-feature-card-border, 1px solid var(--dk-color-border, #e5e7eb));
+    border-radius: var(--dk-feature-card-radius, var(--dk-radius-xl, 1rem));
+    box-shadow: var(--dk-feature-card-shadow, 0 1px 3px rgba(0, 0, 0, 0.04));
+    box-sizing: border-box;
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   }
 
   .icon-container {
@@ -36,8 +48,15 @@ const styles = css`
     width: 48px;
     height: 48px;
     border-radius: var(--dk-radius-lg, 0.75rem);
-    background: var(--dk-color-primary-subtle, rgba(59, 130, 246, 0.1));
+    background: var(--dk-color-primary-subtle, rgba(59, 130, 246, 0.08));
     color: var(--dk-color-primary, #3b82f6);
+    flex-shrink: 0;
+    transition: transform 0.25s ease, background 0.25s ease;
+  }
+
+  .card:hover .icon-container {
+    transform: scale(1.1);
+    background: var(--dk-color-primary-light, rgba(59, 130, 246, 0.14));
   }
 
   .icon-container svg {
@@ -73,11 +92,16 @@ export class DkFeatureCard extends DkElement {
 
   override render() {
     const iconSvg = icons[this.icon];
+    // Fallback: if icon prop is set but not found, show a generic circle icon
+    const fallbackIcon = this.icon
+      ? svg`<circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="3" fill="currentColor"/>`
+      : null;
+    const resolvedIcon = iconSvg || fallbackIcon;
     return html`
       <div class="card" part="card">
-        ${iconSvg
+        ${resolvedIcon
           ? html`<div class="icon-container" part="icon-container">
-              <svg viewBox="0 0 24 24" aria-hidden="true">${iconSvg}</svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true">${resolvedIcon}</svg>
             </div>`
           : nothing}
         <h3 part="title">${this.title}</h3>

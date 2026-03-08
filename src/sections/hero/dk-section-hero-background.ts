@@ -62,12 +62,6 @@ const bgStyles = css`
     max-width: 640px;
   }
 
-  .badge {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.25);
-  }
-
   .cta-group {
     justify-content: center;
   }
@@ -79,7 +73,6 @@ export class DkSectionHeroBackground extends DkSectionElement {
 
   @property() headline = '';
   @property() subheadline = '';
-  @property() badge = '';
   @property() image = '';
 
   override async firstUpdated() {
@@ -88,7 +81,6 @@ export class DkSectionHeroBackground extends DkSectionElement {
 
   protected override onEnterViewport() {
     const els = [
-      this.shadowRoot?.querySelector('.badge'),
       this.shadowRoot?.querySelector('h1'),
       this.shadowRoot?.querySelector('.subheadline'),
       this.shadowRoot?.querySelector('.cta-group'),
@@ -104,9 +96,6 @@ export class DkSectionHeroBackground extends DkSectionElement {
           : nothing}
         <div class="overlay" part="overlay"></div>
         <div class="container" part="container">
-          ${this.badge
-            ? html`<span class="badge animate-target" part="badge">${this.badge}</span>`
-            : nothing}
           <h1 class="animate-target" part="headline">${this.headline}</h1>
           ${this.subheadline
             ? html`<p class="subheadline animate-target" part="subheadline">${this.subheadline}</p>`

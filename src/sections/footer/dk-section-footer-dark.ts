@@ -40,12 +40,16 @@ const darkStyles = css`
 
   .columns {
     flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 2rem;
   }
 
   ::slotted(div) {
     display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
     gap: 2rem !important;
+    grid-column: 1 / -1;
   }
 
   /* Override helper text colors in dark context */
@@ -74,15 +78,15 @@ const darkStyles = css`
     .brand-col {
       flex: none;
     }
-
-    ::slotted(div) {
-      grid-template-columns: repeat(2, 1fr) !important;
-    }
   }
 
   @media (max-width: 480px) {
+    .columns {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
     ::slotted(div) {
-      grid-template-columns: 1fr !important;
+      grid-template-columns: repeat(2, 1fr) !important;
     }
   }
 `;

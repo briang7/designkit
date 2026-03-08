@@ -14,9 +14,11 @@ const styles = css`
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: var(--dk-space-5, 1.25rem) 0;
+    padding: var(--dk-space-5, 1.25rem) var(--dk-space-3, 0.75rem);
+    margin: 0 calc(var(--dk-space-3, 0.75rem) * -1);
     background: none;
     border: none;
+    border-radius: var(--dk-radius-md, 0.375rem);
     cursor: pointer;
     text-align: left;
     font-family: var(--dk-font-sans, system-ui, sans-serif);
@@ -25,22 +27,29 @@ const styles = css`
     color: var(--dk-color-text, #111827);
     line-height: var(--dk-leading-relaxed, 1.6);
     gap: var(--dk-space-4, 1rem);
+    transition: color 200ms ease, background 200ms ease;
   }
 
   .trigger:hover {
     color: var(--dk-color-primary, #3b82f6);
+    background: var(--dk-color-surface-hover, rgba(0, 0, 0, 0.02));
   }
 
   .icon {
     flex-shrink: 0;
     width: 20px;
     height: 20px;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 200ms ease;
     color: var(--dk-color-text-muted, #6b7280);
+  }
+
+  .trigger:hover .icon {
+    color: var(--dk-color-primary, #3b82f6);
   }
 
   :host([open]) .icon {
     transform: rotate(45deg);
+    color: var(--dk-color-primary, #3b82f6);
   }
 
   .answer {

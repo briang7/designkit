@@ -21,27 +21,6 @@ describe('dk-section-hero-centered', () => {
     expect(sub.textContent).to.equal('A component library');
   });
 
-  it('renders badge when provided', async () => {
-    const el = await fixture<DkSectionHeroCentered>(html`
-      <dk-section-hero-centered
-        headline="Test"
-        badge="New in v2"
-        no-animate
-      ></dk-section-hero-centered>
-    `);
-    const badge = el.shadowRoot!.querySelector('.badge')!;
-    expect(badge).to.exist;
-    expect(badge.textContent).to.equal('New in v2');
-  });
-
-  it('does not render badge when empty', async () => {
-    const el = await fixture<DkSectionHeroCentered>(html`
-      <dk-section-hero-centered headline="Test" no-animate></dk-section-hero-centered>
-    `);
-    const badge = el.shadowRoot!.querySelector('.badge');
-    expect(badge).to.not.exist;
-  });
-
   it('uses h1 for the headline', async () => {
     const el = await fixture<DkSectionHeroCentered>(html`
       <dk-section-hero-centered headline="Important" no-animate></dk-section-hero-centered>

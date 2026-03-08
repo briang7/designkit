@@ -19,24 +19,33 @@ const styles = css`
     border-radius: var(--dk-radius-xl, 1rem);
     flex: 1;
     box-sizing: border-box;
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
   }
 
   .quote {
     font-family: var(--dk-font-sans, system-ui, sans-serif);
-    font-size: var(--dk-font-size-lg, 1.125rem);
-    line-height: var(--dk-leading-relaxed, 1.6);
+    font-size: var(--dk-font-size-base, 1rem);
+    line-height: var(--dk-leading-relaxed, 1.7);
     color: var(--dk-color-text, #111827);
     margin: 0;
     flex: 1;
+    font-style: italic;
   }
 
   .quote::before {
     content: '\\201C';
-    font-size: 2em;
+    font-size: 2.5em;
     line-height: 0;
-    vertical-align: -0.3em;
+    vertical-align: -0.35em;
     color: var(--dk-color-primary, #3b82f6);
-    margin-right: 0.1em;
+    margin-right: 0.05em;
+    font-style: normal;
+    opacity: 0.6;
   }
 
   .stars {
@@ -56,14 +65,6 @@ const styles = css`
     gap: var(--dk-space-3, 0.75rem);
   }
 
-  .avatar {
-    width: 44px;
-    height: 44px;
-    border-radius: var(--dk-radius-full, 9999px);
-    object-fit: cover;
-    background: var(--dk-color-neutral-100, #f3f4f6);
-  }
-
   .avatar-placeholder {
     width: 44px;
     height: 44px;
@@ -75,6 +76,7 @@ const styles = css`
     justify-content: center;
     font-weight: var(--dk-font-bold, 700);
     font-size: var(--dk-font-size-sm, 0.875rem);
+    flex-shrink: 0;
   }
 
   .author-text {
@@ -103,6 +105,7 @@ export class DkTestimonialCard extends DkElement {
   @property() quote = '';
   @property() author = '';
   @property() role = '';
+  /** @deprecated Avatar images are no longer rendered. Initials are shown instead. */
   @property() avatar = '';
   @property({ type: Number }) rating = 0;
 
@@ -140,9 +143,7 @@ export class DkTestimonialCard extends DkElement {
         <p class="quote" part="quote">${this.quote}</p>
         ${this._renderStars()}
         <div class="author-info" part="author-info">
-          ${this.avatar
-            ? html`<img class="avatar" src=${this.avatar} alt=${this.author} loading="lazy" />`
-            : html`<div class="avatar-placeholder">${this._getInitials()}</div>`}
+          <div class="avatar-placeholder" part="avatar">${this._getInitials()}</div>
           <div class="author-text">
             <span class="author-name" part="author-name">${this.author}</span>
             ${this.role ? html`<span class="author-role" part="author-role">${this.role}</span>` : nothing}

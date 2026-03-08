@@ -19,13 +19,17 @@ const columnsStyles = css`
 
   .columns {
     flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 2rem;
   }
 
-  /* The slotted wrapper div becomes a multi-column grid */
+  /* If a wrapper div is slotted, it spans all columns and becomes its own grid */
   ::slotted(div) {
     display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
     gap: 2rem !important;
+    grid-column: 1 / -1;
   }
 
   @media (max-width: 768px) {
@@ -36,15 +40,15 @@ const columnsStyles = css`
     .brand-col {
       flex: none;
     }
-
-    ::slotted(div) {
-      grid-template-columns: repeat(2, 1fr) !important;
-    }
   }
 
   @media (max-width: 480px) {
+    .columns {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
     ::slotted(div) {
-      grid-template-columns: 1fr !important;
+      grid-template-columns: repeat(2, 1fr) !important;
     }
   }
 `;

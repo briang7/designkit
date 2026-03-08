@@ -17,19 +17,23 @@ const styles = css`
   }
 
   .value {
-    font-family: var(--dk-font-sans, system-ui, sans-serif);
+    font-family: var(--dk-font-display, var(--dk-font-sans, system-ui, sans-serif));
     font-size: var(--dk-font-size-display, clamp(2.5rem, 5vw, 3.5rem));
     font-weight: var(--dk-font-extrabold, 800);
     line-height: 1;
     color: var(--dk-color-primary, #3b82f6);
-    letter-spacing: -0.025em;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
   }
 
   .label {
     font-family: var(--dk-font-sans, system-ui, sans-serif);
-    font-size: var(--dk-font-size-base, 1rem);
+    font-size: var(--dk-font-size-sm, 0.875rem);
+    font-weight: var(--dk-font-medium, 500);
     color: var(--dk-color-text-muted, #6b7280);
     line-height: var(--dk-leading-relaxed, 1.6);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
   }
 
   .icon-container {
@@ -78,12 +82,15 @@ export class DkStat extends DkElement {
     if (this._animated) return;
     this._animated = true;
 
+    // Guard against NaN/non-numeric values
+    const target = Number.isFinite(this.value) ? this.value : 0;
+
     const prefersReduced =
       typeof window !== 'undefined' &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (prefersReduced) {
-      this._displayValue = this.value;
+      this._displayValue = target;
       return;
     }
 
@@ -92,7 +99,7 @@ export class DkStat extends DkElement {
     const tick = (now: number) => {
       const progress = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-      this._displayValue = Math.round(eased * this.value);
+      this._displayValue = Math.round(eased * target);
       if (progress < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);

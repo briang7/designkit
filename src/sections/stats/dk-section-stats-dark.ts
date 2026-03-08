@@ -31,21 +31,10 @@ const darkStyles = css`
     --dk-color-text-muted: #d1d5db;
   }
 
-  ::slotted(dk-stat:not(:last-child)) {
-    border-right: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 1px 0 8px rgba(99, 102, 241, 0.15);
-  }
-
   @media (max-width: 768px) {
     .stats-row {
       flex-direction: column;
       align-items: center;
-    }
-
-    ::slotted(dk-stat:not(:last-child)) {
-      border-right: none;
-      box-shadow: none;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     }
   }
 `;

@@ -13,6 +13,7 @@ const carouselStyles = css`
 
   .track {
     display: flex;
+    align-items: stretch;
     transition: transform 0.5s ease;
   }
 
@@ -21,6 +22,7 @@ const carouselStyles = css`
     min-width: 0;
     padding: var(--dk-space-2, 0.5rem);
     box-sizing: border-box;
+    height: auto;
   }
 
   @media (min-width: 1024px) {

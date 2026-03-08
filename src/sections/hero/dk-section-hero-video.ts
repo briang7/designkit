@@ -54,12 +54,6 @@ const videoStyles = css`
     max-width: 640px;
   }
 
-  .badge {
-    color: var(--dk-hero-video-badge-color, #ffffff);
-    background: var(--dk-hero-video-badge-bg, rgba(255, 255, 255, 0.15));
-    border-color: var(--dk-hero-video-badge-border, rgba(255, 255, 255, 0.25));
-  }
-
   .cta-group {
     justify-content: center;
   }
@@ -71,7 +65,6 @@ export class DkSectionHeroVideo extends DkSectionElement {
 
   @property() headline = '';
   @property() subheadline = '';
-  @property() badge = '';
   @property({ attribute: 'video-src' }) videoSrc = '';
 
   override async firstUpdated() {
@@ -80,7 +73,6 @@ export class DkSectionHeroVideo extends DkSectionElement {
 
   protected override onEnterViewport() {
     const els = [
-      this.shadowRoot?.querySelector('.badge'),
       this.shadowRoot?.querySelector('h1'),
       this.shadowRoot?.querySelector('.subheadline'),
       this.shadowRoot?.querySelector('.cta-group'),
@@ -103,9 +95,6 @@ export class DkSectionHeroVideo extends DkSectionElement {
         </div>
         <div class="overlay" part="overlay"></div>
         <div class="container">
-          ${this.badge
-            ? html`<span class="badge animate-target" part="badge">${this.badge}</span>`
-            : nothing}
           <h1 class="animate-target" part="headline">${this.headline}</h1>
           ${this.subheadline
             ? html`<p class="subheadline animate-target" part="subheadline">${this.subheadline}</p>`

@@ -14,6 +14,15 @@ const styles = css`
     align-items: center;
   }
 
+  /* When no image/media, go full width content */
+  :host([data-no-media]) .row {
+    grid-template-columns: 1fr;
+  }
+
+  :host([data-no-media]) .media {
+    display: none;
+  }
+
   :host([reverse]) .row {
     direction: rtl;
   }
@@ -58,6 +67,22 @@ const styles = css`
     margin: 0;
   }
 
+  .icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: var(--dk-radius-xl, 1rem);
+    background: var(--dk-color-primary-subtle, rgba(59, 130, 246, 0.1));
+    color: var(--dk-color-primary, #3b82f6);
+  }
+
+  .icon-container svg {
+    width: 32px;
+    height: 32px;
+  }
+
   .cta-wrapper {
     display: flex;
     gap: var(--dk-space-3, 0.75rem);
@@ -80,8 +105,33 @@ export class DkFeatureRow extends DkElement {
   static override styles = styles;
 
   @property() image = '';
+  @property() icon = '';
   @property() title = '';
   @property() description = '';
+
+  override connectedCallback() {
+    super.connectedCallback();
+    this._checkMedia();
+  }
+
+  override updated() {
+    this._checkMedia();
+  }
+
+  private _checkMedia() {
+    const hasMedia = !!this.image || !!this.icon;
+    if (hasMedia) {
+      this.removeAttribute('data-no-media');
+    } else {
+      // Check if media slot has content
+      const mediaSlot = this.querySelector('[slot="media"]');
+      if (mediaSlot) {
+        this.removeAttribute('data-no-media');
+      } else {
+        this.setAttribute('data-no-media', '');
+      }
+    }
+  }
 
   override render() {
     return html`
@@ -89,7 +139,14 @@ export class DkFeatureRow extends DkElement {
         <div class="media" part="media">
           ${this.image
             ? html`<img src=${this.image} alt=${this.title} loading="lazy" />`
-            : html`<slot name="media"></slot>`}
+            : this.icon
+              ? html`<div class="icon-container" part="icon-container">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <circle cx="12" cy="12" r="3" fill="currentColor"/>
+                  </svg>
+                </div>`
+              : html`<slot name="media"></slot>`}
         </div>
         <div class="content" part="content">
           <h3 part="title">${this.title}</h3>

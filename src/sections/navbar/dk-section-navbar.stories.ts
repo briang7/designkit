@@ -34,12 +34,10 @@ export const Simple: Story = {
       ?transparent=${args.transparent}
     >
       <span slot="logo">DK</span>
-      <nav slot="links">
-        <a href="#">Products</a>
-        <a href="#">Solutions</a>
-        <a href="#">Pricing</a>
-        <a href="#">Docs</a>
-      </nav>
+      <a slot="links" href="#">Products</a>
+      <a slot="links" href="#">Solutions</a>
+      <a slot="links" href="#">Pricing</a>
+      <a slot="links" href="#">Docs</a>
       <dk-button slot="cta" variant="primary" size="sm">Sign Up</dk-button>
     </dk-section-navbar-simple>
   `,
@@ -49,12 +47,10 @@ export const WithSearch: Story = {
   render: () => html`
     <dk-section-navbar-with-search brand="DevHub">
       <span slot="logo">DH</span>
-      <nav slot="links">
-        <a href="#">Explore</a>
-        <a href="#">Templates</a>
-        <a href="#">Community</a>
-        <a href="#">Blog</a>
-      </nav>
+      <a slot="links" href="#">Explore</a>
+      <a slot="links" href="#">Templates</a>
+      <a slot="links" href="#">Community</a>
+      <a slot="links" href="#">Blog</a>
       <input slot="search" type="text" placeholder="Search components..." />
       <dk-button slot="cta" variant="secondary" size="sm">Log In</dk-button>
     </dk-section-navbar-with-search>
@@ -65,12 +61,10 @@ export const Mega: Story = {
   render: () => html`
     <dk-section-navbar-mega brand="Enterprise">
       <span slot="logo">EN</span>
-      <nav slot="links">
-        <a href="#">Platform</a>
-        <a href="#">Developers</a>
-        <a href="#">Resources</a>
-        <a href="#">Company</a>
-      </nav>
+      <a slot="links" href="#">Platform</a>
+      <a slot="links" href="#">Developers</a>
+      <a slot="links" href="#">Resources</a>
+      <a slot="links" href="#">Company</a>
       <dk-button slot="cta" variant="primary" size="sm">Get Started</dk-button>
     </dk-section-navbar-mega>
   `,

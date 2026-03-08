@@ -54,11 +54,9 @@ export class DkSectionHeroSplit extends DkSectionElement {
 
   @property() headline = '';
   @property() subheadline = '';
-  @property() badge = '';
 
   protected override onEnterViewport() {
     const els = [
-      this.shadowRoot?.querySelector('.badge'),
       this.shadowRoot?.querySelector('h1'),
       this.shadowRoot?.querySelector('.subheadline'),
       this.shadowRoot?.querySelector('.cta-group'),
@@ -72,9 +70,6 @@ export class DkSectionHeroSplit extends DkSectionElement {
       <section part="section">
         <div class="container" part="container">
           <div class="content" part="content">
-            ${this.badge
-              ? html`<span class="badge animate-target" part="badge">${this.badge}</span>`
-              : nothing}
             <h1 class="animate-target" part="headline">${this.headline}</h1>
             ${this.subheadline
               ? html`<p class="subheadline animate-target" part="subheadline">${this.subheadline}</p>`

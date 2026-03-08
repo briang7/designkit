@@ -16,10 +16,12 @@ export const footerBaseStyles = css`
   }
 
   .brand-name {
-    font-size: var(--dk-text-lg, 1.125rem);
+    font-family: var(--dk-font-display, var(--dk-font-sans, system-ui, sans-serif));
+    font-size: var(--dk-text-xl, 1.25rem);
     font-weight: var(--dk-font-bold, 700);
     color: var(--dk-color-text, #111827);
-    margin: 0 0 var(--dk-space-2, 0.5rem);
+    margin: 0 0 var(--dk-space-3, 0.75rem);
+    letter-spacing: -0.02em;
   }
 
   .description {
@@ -44,6 +46,12 @@ export const footerBaseStyles = css`
   .social-row {
     display: flex;
     gap: var(--dk-space-3, 0.75rem);
+    align-items: center;
+  }
+
+  .social-row ::slotted(*) {
+    display: flex !important;
+    gap: var(--dk-space-2, 0.5rem);
     align-items: center;
   }
 

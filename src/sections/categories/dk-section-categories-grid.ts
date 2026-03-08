@@ -12,8 +12,8 @@ const gridStyles = css`
     gap: var(--dk-space-6, 1.5rem);
   }
 
-  /* First card spans 2 rows for visual hierarchy */
-  ::slotted(dk-category-card:first-child) {
+  /* First card spans 2 rows for visual hierarchy — only when enough items */
+  :host([data-has-rows]) ::slotted(dk-category-card:first-child) {
     grid-row: span 2;
   }
 
@@ -28,7 +28,7 @@ const gridStyles = css`
       grid-template-columns: 1fr;
     }
 
-    ::slotted(dk-category-card:first-child) {
+    :host([data-has-rows]) ::slotted(dk-category-card:first-child) {
       grid-row: span 1;
     }
   }
@@ -42,6 +42,26 @@ export class DkSectionCategoriesGrid extends DkSectionElement {
   @property() subheadline = '';
   @property({ type: Number }) columns = 3;
 
+  private _adjustLayout() {
+    const cards = this.querySelectorAll('dk-category-card');
+    const count = cards.length;
+    const cols = this.columns;
+    // Only enable first-child span 2 rows if there are enough items
+    // to fill at least 2 rows in the remaining columns
+    // e.g., 3 cols: first takes 2 rows, need at least cols*2 - 1 = 5 items
+    const minForSpan = cols * 2 - 1;
+    if (count >= minForSpan) {
+      this.setAttribute('data-has-rows', '');
+    } else {
+      this.removeAttribute('data-has-rows');
+    }
+  }
+
+  override connectedCallback() {
+    super.connectedCallback();
+    requestAnimationFrame(() => this._adjustLayout());
+  }
+
   protected override onEnterViewport() {
     const cards = Array.from(this.querySelectorAll('dk-category-card'));
     this.animateEntrance(cards);
@@ -51,6 +71,7 @@ export class DkSectionCategoriesGrid extends DkSectionElement {
     super.updated(changed);
     if (changed.has('columns')) {
       this.style.setProperty('--dk-categories-columns', String(this.columns));
+      this._adjustLayout();
     }
   }
 
@@ -65,7 +86,7 @@ export class DkSectionCategoriesGrid extends DkSectionElement {
               </div>`
             : nothing}
           <div class="grid" part="grid">
-            <slot></slot>
+            <slot @slotchange=${this._adjustLayout}></slot>
           </div>
         </div>
       </section>

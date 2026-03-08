@@ -15,12 +15,12 @@ const darkNavStyles = css`
   }
 
   .links ::slotted(a) {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.7) !important;
   }
 
   .links ::slotted(a:hover) {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.08) !important;
   }
 
   .hamburger span {

@@ -65,11 +65,12 @@ const styles = css`
   }
 
   .name {
-    font-family: var(--dk-font-sans, system-ui, sans-serif);
-    font-size: var(--dk-font-size-lg, 1.125rem);
+    font-family: var(--dk-font-display, var(--dk-font-sans, system-ui, sans-serif));
+    font-size: var(--dk-font-size-xl, 1.25rem);
     font-weight: var(--dk-font-bold, 700);
     margin: 0 0 var(--dk-space-1, 0.25rem);
     line-height: var(--dk-leading-tight, 1.3);
+    letter-spacing: -0.01em;
   }
 
   .description {

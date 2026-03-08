@@ -17,7 +17,12 @@ const styles = css`
     border-radius: var(--dk-radius-xl, 1rem);
     height: 100%;
     position: relative;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
   }
 
   :host([featured]) .card {
@@ -25,6 +30,11 @@ const styles = css`
     border-width: 2px;
     transform: scale(1.05);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  :host([featured]) .card:hover {
+    transform: scale(1.05) translateY(-4px);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12);
   }
 
   .badge {

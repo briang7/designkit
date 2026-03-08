@@ -16,12 +16,10 @@ const meta: Meta = {
   argTypes: {
     headline: { control: 'text' },
     subheadline: { control: 'text' },
-    badge: { control: 'text' },
   },
   args: {
     headline: 'Build Beautiful Interfaces Faster',
     subheadline: 'A modern design system built with Lit web components. Ship polished UIs in record time.',
-    badge: 'New Release',
   },
 };
 
@@ -33,7 +31,6 @@ export const Centered: Story = {
     <dk-section-hero-centered
       headline=${args.headline}
       subheadline=${args.subheadline}
-      badge=${args.badge}
     >
       <dk-button slot="cta-primary" variant="primary" size="lg">Get Started</dk-button>
       <dk-button slot="cta-secondary" variant="secondary" size="lg">View Docs</dk-button>
@@ -77,7 +74,6 @@ export const Gradient: Story = {
     <dk-section-hero-gradient
       headline="Unleash Your Creativity"
       subheadline="A vibrant, animated gradient hero that captures attention instantly. Perfect for bold product launches."
-      badge="Coming Soon"
     >
       <dk-button slot="cta-primary" variant="primary" size="lg">Get Early Access</dk-button>
       <dk-button slot="cta-secondary" variant="ghost" size="lg">See Features</dk-button>
@@ -101,7 +97,6 @@ export const ImageTiles: Story = {
     <dk-section-hero-image-tiles
       headline="Curate Your Collection"
       subheadline="Showcase multiple visuals in an asymmetric grid layout alongside compelling copy."
-      badge="Portfolio"
     >
       <dk-button slot="cta-primary" variant="primary" size="lg">Browse Gallery</dk-button>
       <dk-button slot="cta-secondary" variant="secondary" size="lg">Upload Yours</dk-button>
@@ -118,7 +113,6 @@ export const Video: Story = {
     <dk-section-hero-video
       headline="Experience in Motion"
       subheadline="A full-bleed background video hero with a dark overlay for maximum readability."
-      badge="Live Demo"
       video-src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4"
     >
       <dk-button slot="cta-primary" variant="primary" size="lg">Play Reel</dk-button>

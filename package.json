@@ -1,6 +1,6 @@
 {
   "name": "@briang7/designkit",
-  "version": "0.3.0",
+  "version": "0.3.5",
   "description": "Framework-agnostic UI component library built with Lit Web Components",
   "type": "module",
   "main": "dist/designkit.umd.cjs",

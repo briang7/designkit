@@ -52,19 +52,21 @@ const styles = css`
   }
 
   .dot {
-    width: var(--dk-timeline-dot-size, 1rem);
-    height: var(--dk-timeline-dot-size, 1rem);
+    width: var(--dk-timeline-dot-size, 0.875rem);
+    height: var(--dk-timeline-dot-size, 0.875rem);
     border-radius: 50%;
-    background: var(--dk-timeline-dot-color, #e5e7eb);
+    background: var(--dk-timeline-dot-color, #d1d5db);
     border: 2px solid var(--dk-timeline-dot-border, #ffffff);
     flex-shrink: 0;
     z-index: 1;
-    box-shadow: 0 0 0 3px var(--dk-timeline-dot-ring, #e5e7eb);
+    box-shadow: 0 0 0 3px var(--dk-timeline-dot-ring, #f3f4f6);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
   }
 
   :host([active]) .dot {
     background: var(--dk-color-primary, #3b82f6);
-    box-shadow: 0 0 0 3px var(--dk-color-primary-subtle, rgba(59, 130, 246, 0.2));
+    box-shadow: 0 0 0 4px var(--dk-color-primary-subtle, rgba(59, 130, 246, 0.15)),
+                0 0 12px var(--dk-color-primary-subtle, rgba(59, 130, 246, 0.2));
   }
 
   .icon-container {
@@ -78,11 +80,13 @@ const styles = css`
     color: var(--dk-color-text-muted, #6b7280);
     flex-shrink: 0;
     z-index: 1;
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
   }
 
   :host([active]) .icon-container {
     background: var(--dk-color-primary-subtle, rgba(59, 130, 246, 0.1));
     color: var(--dk-color-primary, #3b82f6);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.08);
   }
 
   .icon-container svg {

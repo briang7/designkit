@@ -8,66 +8,53 @@ const alternatingStyles = css`
   .steps {
     position: relative;
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--dk-space-4, 1rem);
-    padding-top: var(--dk-space-8, 2rem);
+    flex-direction: column;
+    gap: var(--dk-space-8, 2rem);
+    padding: var(--dk-space-8, 2rem) 0;
   }
 
-  /* Horizontal connecting line */
+  /* Center vertical line */
   .steps::before {
     content: '';
     position: absolute;
-    top: calc(var(--dk-space-8, 2rem) + 1.25rem);
-    left: 0;
-    right: 0;
-    height: 2px;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
     background: var(--dk-timeline-line-color, #e5e7eb);
   }
 
   ::slotted(dk-timeline-step) {
-    flex: 1;
-    text-align: center;
     position: relative;
+    width: calc(50% - var(--dk-space-8, 2rem));
     --dk-timeline-connector-height: 0;
   }
 
-  /* Alternate content above and below the line */
-  ::slotted(dk-timeline-step:nth-child(even)) {
-    margin-top: var(--dk-space-16, 4rem);
-  }
-
+  /* Odd items: align left */
   ::slotted(dk-timeline-step:nth-child(odd)) {
-    margin-top: 0;
+    align-self: flex-start;
+    text-align: right;
   }
 
-  /* Responsive: stack vertically on mobile */
-  @media (max-width: 768px) {
-    .steps {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0;
-      padding-top: 0;
-    }
+  /* Even items: align right */
+  ::slotted(dk-timeline-step:nth-child(even)) {
+    align-self: flex-end;
+    text-align: left;
+  }
 
+  /* Responsive: stack vertically with left line on mobile */
+  @media (max-width: 768px) {
     .steps::before {
-      top: 0;
-      bottom: 0;
       left: 1.25rem;
-      right: auto;
-      width: 2px;
-      height: auto;
+      transform: none;
     }
 
     ::slotted(dk-timeline-step) {
-      text-align: left;
-      margin-top: 0 !important;
-      margin-bottom: var(--dk-space-6, 1.5rem);
+      width: auto;
+      text-align: left !important;
+      align-self: stretch !important;
       padding-left: var(--dk-space-12, 3rem);
-    }
-
-    ::slotted(dk-timeline-step:last-child) {
-      margin-bottom: 0;
     }
   }
 `;

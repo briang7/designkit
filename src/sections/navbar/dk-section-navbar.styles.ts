@@ -53,25 +53,34 @@ export const navbarBaseStyles = css`
   .links {
     display: flex;
     align-items: center;
-    gap: var(--dk-space-2, 0.5rem);
+    gap: var(--dk-navbar-link-gap, var(--dk-space-2, 0.5rem));
     flex: 1;
     justify-content: center;
   }
 
-  .links ::slotted(a) {
-    padding: var(--dk-space-2, 0.5rem) var(--dk-space-3, 0.75rem);
+  .links ::slotted(a),
+  .links ::slotted(nav) {
+    padding: var(--dk-space-2, 0.5rem) var(--dk-space-4, 1rem);
     font-size: var(--dk-text-sm, 0.875rem);
     font-weight: var(--dk-font-medium, 500);
     color: var(--dk-color-text-muted, #6b7280);
     text-decoration: none;
     border-radius: var(--dk-radius-md, 0.375rem);
-    transition: color var(--dk-transition-fast, 150ms),
-                background var(--dk-transition-fast, 150ms);
+    transition: color 200ms ease,
+                background 200ms ease;
+    letter-spacing: 0.01em;
+  }
+
+  .links ::slotted(nav) {
+    display: flex;
+    align-items: center;
+    gap: var(--dk-navbar-link-gap, var(--dk-space-2, 0.5rem));
+    padding: 0;
   }
 
   .links ::slotted(a:hover) {
     color: var(--dk-color-text, #111827);
-    background: var(--dk-color-surface-hover, #f3f4f6);
+    background: var(--dk-color-surface-hover, rgba(0, 0, 0, 0.04));
   }
 
   .cta {

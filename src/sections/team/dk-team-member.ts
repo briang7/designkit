@@ -16,13 +16,20 @@ const styles = css`
     text-align: center;
     display: flex;
     flex-direction: var(--dk-team-card-direction, column);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
   }
 
   .image-wrapper {
     position: relative;
     overflow: hidden;
-    aspect-ratio: var(--dk-team-image-aspect, 1);
-    max-height: var(--dk-team-image-max-height, none);
+    aspect-ratio: var(--dk-team-image-aspect, 4/5);
+    max-height: var(--dk-team-image-max-height, 280px);
     width: var(--dk-team-image-width, auto);
     flex-shrink: 0;
   }

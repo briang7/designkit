@@ -34,21 +34,23 @@ export const ctaBaseStyles = css`
   }
 
   h2 {
-    font-family: var(--dk-font-sans, system-ui, sans-serif);
-    font-size: var(--dk-font-size-h2, clamp(1.875rem, 4vw, 2.5rem));
+    font-family: var(--dk-font-display, var(--dk-font-sans, system-ui, sans-serif));
+    font-size: var(--dk-font-size-h2, clamp(2rem, 4.5vw, 3rem));
     font-weight: var(--dk-font-extrabold, 800);
-    line-height: var(--dk-leading-tight, 1.15);
+    line-height: var(--dk-leading-tight, 1.1);
     color: var(--dk-color-text, #111827);
     margin: 0 0 var(--dk-space-4, 1rem);
-    letter-spacing: -0.025em;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
   }
 
   .description {
     font-family: var(--dk-font-sans, system-ui, sans-serif);
     font-size: var(--dk-font-size-subheadline, clamp(1.125rem, 2vw, 1.375rem));
-    line-height: var(--dk-leading-relaxed, 1.6);
+    line-height: var(--dk-leading-relaxed, 1.65);
     color: var(--dk-color-text-muted, #6b7280);
     margin: 0 0 var(--dk-space-8, 2rem);
+    text-wrap: balance;
   }
 
   .cta-group {

@@ -9,12 +9,12 @@ import type { DkLightbox, LightboxImage } from '../../components/lightbox/dk-lig
 const masonryStyles = css`
   .masonry {
     column-count: var(--dk-masonry-columns, 3);
-    column-gap: var(--dk-space-4, 1rem);
+    column-gap: var(--dk-space-6, 1.5rem);
   }
 
   .masonry ::slotted(*) {
     break-inside: avoid;
-    margin-bottom: var(--dk-space-4, 1rem);
+    margin-bottom: var(--dk-space-6, 1.5rem);
     display: block;
     --dk-gallery-item-ratio: auto;
   }
@@ -44,6 +44,7 @@ export class DkSectionGalleryMasonry extends DkSectionElement {
   override connectedCallback() {
     super.connectedCallback();
     this.addEventListener('dk-gallery-select', this._handleSelect as EventListener);
+    requestAnimationFrame(() => this._adjustColumns());
   }
 
   override disconnectedCallback() {
@@ -51,10 +52,20 @@ export class DkSectionGalleryMasonry extends DkSectionElement {
     this.removeEventListener('dk-gallery-select', this._handleSelect as EventListener);
   }
 
+  private _adjustColumns() {
+    const items = this.querySelectorAll('dk-gallery-item');
+    const count = items.length;
+    // Use user-specified columns, but auto-reduce if too few items
+    let cols = this.columns;
+    if (count < 5 && cols >= 3) cols = 2;
+    if (count < 3) cols = 1;
+    this.style.setProperty('--dk-masonry-columns', String(cols));
+  }
+
   override updated(changed: Map<PropertyKey, unknown>) {
     super.updated(changed);
     if (changed.has('columns')) {
-      this.style.setProperty('--dk-masonry-columns', String(this.columns));
+      this._adjustColumns();
     }
   }
 
@@ -89,7 +100,7 @@ export class DkSectionGalleryMasonry extends DkSectionElement {
             ? html`<div class="section-header"><h2 part="headline">${this.headline}</h2></div>`
             : nothing}
           <div class="masonry" part="masonry">
-            <slot></slot>
+            <slot @slotchange=${this._adjustColumns}></slot>
           </div>
         </div>
       </section>

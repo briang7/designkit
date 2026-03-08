@@ -6,15 +6,15 @@ import './dk-testimonial-card.js';
 
 const localStyles = css`
   .masonry {
-    column-count: 3;
-    column-gap: var(--dk-space-8, 2rem);
+    column-count: var(--dk-masonry-columns, 3);
+    column-gap: var(--dk-space-6, 1.5rem);
   }
 
   ::slotted(*) {
     display: inline-block;
     width: 100%;
     break-inside: avoid;
-    margin-bottom: var(--dk-space-8, 2rem);
+    margin-bottom: var(--dk-space-6, 1.5rem);
     box-sizing: border-box;
   }
 
@@ -38,6 +38,22 @@ export class DkSectionTestimonialsMasonry extends DkSectionElement {
   @property() headline = '';
   @property() subheadline = '';
 
+  private _adjustColumns() {
+    const items = this.querySelectorAll('dk-testimonial-card');
+    const count = items.length;
+    // Need at least 5 items for 3 columns, at least 3 for 2 columns
+    let cols = 3;
+    if (count < 5) cols = 2;
+    if (count < 3) cols = 1;
+    this.style.setProperty('--dk-masonry-columns', String(cols));
+  }
+
+  override connectedCallback() {
+    super.connectedCallback();
+    // Run after children are parsed
+    requestAnimationFrame(() => this._adjustColumns());
+  }
+
   protected override onEnterViewport() {
     const cards = Array.from(
       this.querySelectorAll('dk-testimonial-card')
@@ -56,7 +72,7 @@ export class DkSectionTestimonialsMasonry extends DkSectionElement {
               </div>`
             : nothing}
           <div class="masonry" part="masonry">
-            <slot></slot>
+            <slot @slotchange=${this._adjustColumns}></slot>
           </div>
         </div>
       </section>
