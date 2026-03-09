@@ -1,5 +1,5 @@
-// Minimal shims so Lit can load in Node.js (SSR / Next.js build).
-// Components won't render on the server — they only need to not crash on import.
+// Minimal shims so Lit can load in Node.js (SSR / Next.js).
+// Only polyfills globals that don't exist yet — never overwrites existing ones.
 
 const g = globalThis as Record<string, unknown>;
 
@@ -16,26 +16,48 @@ if (typeof g.customElements === 'undefined') {
 }
 
 if (typeof g.Document === 'undefined') {
-  // Use function constructor — class prototype is read-only
   function Document() {}
   g.Document = Document as unknown as typeof globalThis.Document;
 }
 
 if (typeof g.document === 'undefined') {
+  const noop = () => ({});
   g.document = {
-    createComment: () => ({}),
-    createElement: () => ({}),
-    createElementNS: () => ({}),
-    createTextNode: () => ({}),
+    createComment: noop,
+    createElement: noop,
+    createElementNS: noop,
+    createTextNode: noop,
     createTreeWalker: () => ({ nextNode: () => null }),
     importNode: (node: unknown) => node,
+    querySelector: () => null,
+    querySelectorAll: () => [],
+    getElementById: () => null,
+    getElementsByTagName: () => [],
+    getElementsByClassName: () => [],
     adoptedStyleSheets: [],
-    head: { appendChild: () => ({}) },
+    documentElement: { style: {} },
+    head: { appendChild: noop, querySelectorAll: () => [] },
+    body: { appendChild: noop },
   } as unknown as Document;
 }
 
 if (typeof g.window === 'undefined') {
   g.window = g as unknown as Window & typeof globalThis;
+}
+
+// Next.js SSR reads window.location
+if (typeof g.location === 'undefined') {
+  g.location = {
+    protocol: 'http:',
+    hostname: 'localhost',
+    port: '',
+    pathname: '/',
+    search: '',
+    hash: '',
+    href: 'http://localhost/',
+    origin: 'http://localhost',
+    host: 'localhost',
+  } as unknown as Location;
 }
 
 if (typeof g.CSSStyleSheet === 'undefined') {
@@ -46,14 +68,14 @@ if (typeof g.CSSStyleSheet === 'undefined') {
   } as unknown as typeof globalThis.CSSStyleSheet;
 }
 
+if (typeof g.ShadowRoot === 'undefined') {
+  g.ShadowRoot = class ShadowRoot {} as unknown as typeof globalThis.ShadowRoot;
+}
+
 if (typeof g.MutationObserver === 'undefined') {
   g.MutationObserver = class MutationObserver {
     observe() {}
     disconnect() {}
     takeRecords() { return []; }
   } as unknown as typeof globalThis.MutationObserver;
-}
-
-if (typeof g.ShadowRoot === 'undefined') {
-  g.ShadowRoot = class ShadowRoot {} as unknown as typeof globalThis.ShadowRoot;
 }
