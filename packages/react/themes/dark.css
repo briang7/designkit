@@ -1,0 +1,40 @@
+/* Dark theme defaults — wrapped in :where() for zero specificity.
+   Any user .dk-dark override wins automatically regardless of load order. */
+:where(.dk-dark) {
+  --dk-color-bg: var(--dk-gray-950);
+  --dk-color-surface: var(--dk-gray-900);
+  --dk-color-surface-raised: var(--dk-gray-800);
+  --dk-color-text: var(--dk-gray-100);
+  --dk-color-text-muted: var(--dk-gray-400);
+  --dk-color-text-inverse: var(--dk-gray-900);
+  --dk-color-primary: var(--dk-blue-500);
+  --dk-color-primary-hover: var(--dk-blue-400);
+  --dk-color-primary-light: rgb(37 99 235 / 0.15);
+  --dk-color-primary-text: var(--dk-white);
+  --dk-color-danger: var(--dk-red-500);
+  --dk-color-danger-hover: var(--dk-red-600);
+  --dk-color-danger-light: rgb(220 38 38 / 0.15);
+  --dk-color-success: var(--dk-green-500);
+  --dk-color-success-light: rgb(22 163 74 / 0.15);
+  --dk-color-warning: var(--dk-yellow-500);
+  --dk-color-warning-light: rgb(202 138 4 / 0.15);
+  --dk-color-border: var(--dk-gray-700);
+  --dk-color-border-hover: var(--dk-gray-600);
+  --dk-color-focus: var(--dk-blue-400);
+  --dk-focus-ring: 0 0 0 2px var(--dk-color-bg), 0 0 0 4px var(--dk-color-focus);
+  --dk-color-overlay: rgb(0 0 0 / 0.7);
+  --dk-color-input-bg: var(--dk-gray-800);
+  --dk-color-input-border: var(--dk-gray-600);
+  --dk-color-input-border-hover: var(--dk-gray-500);
+  --dk-color-input-border-focus: var(--dk-blue-400);
+  --dk-color-input-placeholder: var(--dk-gray-500);
+  --dk-section-bg-primary: var(--dk-gray-900);
+  --dk-section-bg-alt: var(--dk-gray-800);
+  --dk-section-bg-brand: var(--dk-color-primary);
+  --dk-section-bg-dark: var(--dk-gray-950);
+  --dk-section-text-on-brand: #ffffff;
+  --dk-section-text-on-dark: #ffffff;
+  --dk-navbar-bg: var(--dk-gray-900);
+  --dk-skeleton-base: var(--dk-gray-700);
+  --dk-skeleton-shine: var(--dk-gray-600);
+}

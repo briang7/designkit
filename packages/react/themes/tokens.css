@@ -1,0 +1,238 @@
+:root {
+  /* Colors - Blue */
+  --dk-blue-50: #eff6ff;
+  --dk-blue-100: #dbeafe;
+  --dk-blue-200: #bfdbfe;
+  --dk-blue-300: #93c5fd;
+  --dk-blue-400: #60a5fa;
+  --dk-blue-500: #3b82f6;
+  --dk-blue-600: #2563eb;
+  --dk-blue-700: #1d4ed8;
+  --dk-blue-800: #1e40af;
+  --dk-blue-900: #1e3a8a;
+
+  /* Colors - Gray */
+  --dk-gray-50: #f9fafb;
+  --dk-gray-100: #f3f4f6;
+  --dk-gray-200: #e5e7eb;
+  --dk-gray-300: #d1d5db;
+  --dk-gray-400: #9ca3af;
+  --dk-gray-500: #6b7280;
+  --dk-gray-600: #4b5563;
+  --dk-gray-700: #374151;
+  --dk-gray-800: #1f2937;
+  --dk-gray-900: #111827;
+  --dk-gray-950: #030712;
+
+  /* Colors - Red */
+  --dk-red-50: #fef2f2;
+  --dk-red-100: #fee2e2;
+  --dk-red-500: #ef4444;
+  --dk-red-600: #dc2626;
+  --dk-red-700: #b91c1c;
+
+  /* Colors - Green */
+  --dk-green-50: #f0fdf4;
+  --dk-green-100: #dcfce7;
+  --dk-green-500: #22c55e;
+  --dk-green-600: #16a34a;
+  --dk-green-700: #15803d;
+
+  /* Colors - Yellow */
+  --dk-yellow-50: #fefce8;
+  --dk-yellow-100: #fef9c3;
+  --dk-yellow-500: #eab308;
+  --dk-yellow-600: #ca8a04;
+
+  /* Colors - Purple */
+  --dk-purple-50: #faf5ff;
+  --dk-purple-500: #a855f7;
+  --dk-purple-600: #9333ea;
+
+  /* White */
+  --dk-white: #ffffff;
+  --dk-black: #000000;
+
+  /* Spacing */
+  --dk-space-0: 0;
+  --dk-space-1: 4px;
+  --dk-space-2: 8px;
+  --dk-space-3: 12px;
+  --dk-space-4: 16px;
+  --dk-space-5: 20px;
+  --dk-space-6: 24px;
+  --dk-space-8: 32px;
+  --dk-space-10: 40px;
+  --dk-space-12: 48px;
+  --dk-space-16: 64px;
+
+  /* Border Radius */
+  --dk-radius-none: 0;
+  --dk-radius-sm: 4px;
+  --dk-radius-md: 8px;
+  --dk-radius-lg: 12px;
+  --dk-radius-xl: 16px;
+  --dk-radius-full: 9999px;
+
+  /* Font Sizes */
+  --dk-text-xs: 0.75rem;
+  --dk-text-sm: 0.875rem;
+  --dk-text-md: 1rem;
+  --dk-text-lg: 1.125rem;
+  --dk-text-xl: 1.25rem;
+
+  /* Font Weights */
+  --dk-font-normal: 400;
+  --dk-font-medium: 500;
+  --dk-font-semibold: 600;
+  --dk-font-bold: 700;
+
+  /* Line Heights */
+  --dk-leading-tight: 1.25;
+  --dk-leading-normal: 1.5;
+
+  /* Shadows */
+  --dk-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --dk-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --dk-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --dk-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* Transitions */
+  --dk-transition-fast: 150ms ease;
+  --dk-transition-normal: 250ms ease;
+  --dk-transition-slow: 350ms ease;
+
+  /* Z-Index */
+  --dk-z-dropdown: 1000;
+  --dk-z-sticky: 1100;
+  --dk-z-overlay: 1300;
+  --dk-z-modal: 1400;
+  --dk-z-toast: 1500;
+  --dk-z-tooltip: 1600;
+
+  /* Font Family */
+  --dk-font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --dk-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Section spacing */
+  --dk-section-padding-y: 80px;
+  --dk-section-padding-x: 24px;
+  --dk-section-max-width: 1280px;
+  --dk-section-gap: 64px;
+
+  /* Typography scale (display) */
+  --dk-font-size-display: 3.5rem;
+  --dk-font-size-headline: 2.25rem;
+  --dk-font-size-subheadline: 1.25rem;
+  --dk-line-height-display: 1.1;
+  --dk-line-height-headline: 1.2;
+
+  /* Animation tokens */
+  --dk-spring-stiffness: 300;
+  --dk-spring-damping: 24;
+  --dk-stagger-delay: 50ms;
+  --dk-entrance-duration: 600ms;
+  --dk-entrance-distance: 20px;
+
+  /* Skeleton */
+  --dk-skeleton-base: var(--dk-gray-200);
+  --dk-skeleton-shine: var(--dk-gray-100);
+
+  /* Navbar */
+  --dk-navbar-height: 64px;
+}
+
+/* FOUC prevention — hide unregistered section elements until they upgrade */
+dk-section-navbar-simple:not(:defined),
+dk-section-navbar-dark:not(:defined),
+dk-section-navbar-mega:not(:defined),
+dk-section-navbar-centered:not(:defined),
+dk-section-navbar-with-search:not(:defined),
+dk-section-hero-background:not(:defined),
+dk-section-hero-centered:not(:defined),
+dk-section-hero-split:not(:defined),
+dk-section-hero-gradient:not(:defined),
+dk-section-hero-minimal:not(:defined),
+dk-section-hero-video:not(:defined),
+dk-section-hero-image-tiles:not(:defined),
+dk-section-features-grid:not(:defined),
+dk-section-features-icon-grid:not(:defined),
+dk-section-features-centered:not(:defined),
+dk-section-features-alternating:not(:defined),
+dk-section-features-with-image:not(:defined),
+dk-section-features-tabs:not(:defined),
+dk-section-stats-bar:not(:defined),
+dk-section-stats-cards:not(:defined),
+dk-section-stats-dark:not(:defined),
+dk-section-stats-with-image:not(:defined),
+dk-section-testimonials-grid:not(:defined),
+dk-section-testimonials-masonry:not(:defined),
+dk-section-testimonials-carousel:not(:defined),
+dk-section-testimonials-featured:not(:defined),
+dk-section-testimonials-dark:not(:defined),
+dk-section-pricing-tiers:not(:defined),
+dk-section-pricing-comparison:not(:defined),
+dk-section-pricing-simple:not(:defined),
+dk-section-pricing-dark:not(:defined),
+dk-section-pricing-with-toggle:not(:defined),
+dk-section-faq-accordion:not(:defined),
+dk-section-faq-two-column:not(:defined),
+dk-section-faq-centered:not(:defined),
+dk-section-faq-dark:not(:defined),
+dk-section-cta-centered:not(:defined),
+dk-section-cta-split:not(:defined),
+dk-section-cta-dark:not(:defined),
+dk-section-cta-with-image:not(:defined),
+dk-section-cta-brand:not(:defined),
+dk-section-newsletter-inline:not(:defined),
+dk-section-newsletter-card:not(:defined),
+dk-section-newsletter-dark:not(:defined),
+dk-section-newsletter-with-image:not(:defined),
+dk-section-footer-columns:not(:defined),
+dk-section-footer-simple:not(:defined),
+dk-section-footer-dark:not(:defined),
+dk-section-footer-centered:not(:defined),
+dk-section-footer-with-newsletter:not(:defined),
+dk-section-gallery-grid:not(:defined),
+dk-section-gallery-masonry:not(:defined),
+dk-section-gallery-carousel:not(:defined),
+dk-section-contact-split:not(:defined),
+dk-section-contact-centered:not(:defined),
+dk-section-contact-dark:not(:defined),
+dk-section-contact-with-map:not(:defined),
+dk-section-team-grid:not(:defined),
+dk-section-team-cards:not(:defined),
+dk-section-team-list:not(:defined),
+dk-section-team-compact:not(:defined),
+dk-section-categories-grid:not(:defined),
+dk-section-categories-scroll:not(:defined),
+dk-section-timeline-alternating:not(:defined),
+dk-section-timeline-vertical:not(:defined),
+dk-section-blog-grid:not(:defined),
+dk-section-blog-featured:not(:defined),
+dk-section-products-grid:not(:defined),
+dk-section-products-carousel:not(:defined),
+dk-section-logo-cloud-simple:not(:defined),
+dk-section-logo-cloud-grid:not(:defined),
+dk-section-logo-cloud-split:not(:defined),
+dk-section-banner-bar:not(:defined),
+dk-section-banner-cookie:not(:defined),
+dk-section-banner-floating:not(:defined),
+dk-section-error-simple:not(:defined),
+dk-section-error-split:not(:defined),
+dk-section-error-with-links:not(:defined),
+dk-section-sidebar-brand:not(:defined),
+dk-section-sidebar-nav:not(:defined) {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+/* Base link reset — removes default blue/underline from all links inside DesignKit components */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--dk-color-primary, #3b82f6);
+}
