@@ -6,6 +6,10 @@ on:
 permissions:
   contents: read
 
+defaults:
+  run:
+    working-directory: packages/react
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -16,10 +20,10 @@ jobs:
           node-version: 22
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
-        run: cd packages/react && npm install
+        run: npm install
       - name: Build
-        run: cd packages/react && npm run build
+        run: npm run build
       - name: Publish
-        run: cd packages/react && npm publish --access public
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
