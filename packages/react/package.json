@@ -17,6 +17,10 @@
     },
     "./themes/*": "./themes/*"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "files": ["dist", "themes"],
   "scripts": {
     "build": "tsc",
