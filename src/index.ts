@@ -1,4 +1,5 @@
 // @briang7/designkit - Framework-agnostic UI component library
+import './ssr-shim.js';
 
 export { DkButton } from './components/button/index.js';
 export type { ButtonVariant, ButtonSize } from './components/button/index.js';

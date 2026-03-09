@@ -1,4 +1,5 @@
 // Section components
+import './ssr-shim.js';
 export * from './sections/navbar/index.js';
 export * from './sections/hero/index.js';
 export * from './sections/footer/index.js';
